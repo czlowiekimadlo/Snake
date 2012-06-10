@@ -18,6 +18,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name=".ActivityContinueGame"
+            android:label="@string/app_name" >
+            
+        </activity>
+        <activity
+            android:name=".ActivityNewGame"
+            android:label="@string/app_name" >
+        </activity>
+         <activity
+            android:name=".ActivityExitApplication"
+            android:label="@string/app_name" >
+        </activity>
+         <activity
+            android:name=".ActivityViewHighScores"
+            android:label="@string/app_name" >
+        </activity>
+         <activity
+            android:name=".ActivityViewSettings"
+            android:label="@string/app_name" >
+        </activity>
+        
     </application>
 
 </manifest>
