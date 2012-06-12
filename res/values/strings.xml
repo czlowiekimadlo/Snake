@@ -3,5 +3,9 @@
 
     <string name="hello">Welcome to Snake Menu!</string>
     <string name="app_name">Snake</string>
-
+    <string-array name="settings_array">
+        <item>Change color theme</item>
+        <item>Change language</item>
+        <item>Sounds</item>
+    </string-array>
 </resources>
