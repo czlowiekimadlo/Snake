@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout
+	
+	android:id="@+id/widget37"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<Button
+	android:id="@+id/pauseButton"
+        android:layout_width="70px"
+        android:layout_height="70px"
+	android:text="||"
+	android:textStyle="bold"
+	android:gravity="center"
+	android:layout_x="0dp"
+	android:layout_y="0dp" />
+<Button
+	android:id="@+id/exitButton"
+	android:layout_width="70px"
+	android:layout_height="70px"
+	android:text="X"
+	android:textStyle="bold"
+	android:layout_x="275dp"
+	android:layout_y="0dp" />
+<ImageButton
+        android:id="@+id/keyleft"
+        android:clickable="true"
+        android:layout_height="80dp"
+        android:layout_width="80dp"
+        android:onClick="keyleft"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/left"
+        android:layout_x="0dp"
+	android:layout_y="410dp"
+    />
+<ImageButton
+        android:id="@+id/keyright"
+        android:clickable="true"
+        android:layout_height="80dp"
+        android:layout_width="80dp"
+        android:onClick="keyright"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/right"
+        android:layout_x="240dp"
+	android:layout_y="410dp"
+    />
+</AbsoluteLayout>

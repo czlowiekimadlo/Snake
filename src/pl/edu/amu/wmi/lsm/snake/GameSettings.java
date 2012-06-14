@@ -11,11 +11,13 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 //import android.widget.Toast;
 
 /**
@@ -26,8 +28,11 @@ public class GameSettings extends ListActivity {
    private SharedPreferences mPrefs;
    private final String SHARED_PREFERENCE = "Settings";
    private final String KEY_LANG = "lang";
+   public String lang;
    private final String KEY_COL = "color";
+   public String color;
    private final String KEY_SOUND = "sound";
+   public boolean sound;
     /** Called when the activity is first created. */
 
     @Override
@@ -39,6 +44,11 @@ public class GameSettings extends ListActivity {
 
       ListView lv = getListView();
       lv.setTextFilterEnabled(true);
+
+
+//                Toast.makeText(getApplicationContext(), ((TextView) view).getText() ,
+//              Toast.LENGTH_SHORT).show();
+
 
       lv.setOnItemClickListener(new OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View view,
@@ -62,22 +72,22 @@ public class GameSettings extends ListActivity {
       });
     }
 
-//    @Override
-//public void onResume()
-//{
-//    if(! SoundManager.getInstance().isPlaying("thisStageSound") ) //if it's already playing, do not stop it!
-//    {
-//        SoundManager.getInstance().stopAllSounds();
-//        SoundManager.getInstance().playSound("thisStageSound");
-//    }
-//    super.onResume();
-//}
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putString(KEY_COL, color);
+            outState.putString(KEY_LANG, lang);
+            outState.putBoolean(KEY_SOUND, sound);
+    }
 
-//    public void onDestroy()
-//    {
-//    	super.onDestroy();
-//    	SoundManager.cleanup();
-//    }
+    @Override
+    protected void onRestoreInstanceState(Bundle savedIS) {
+            Log.i("onRestoreInstanceState", "onRestoreInstanceState");
+            super.onRestoreInstanceState(savedIS);
+            color = savedIS.getString(KEY_COL);
+            lang = savedIS.getString(KEY_LANG);
+            sound = savedIS.getBoolean(KEY_SOUND);
+    }
 
 public void alertLang()
     {
@@ -88,7 +98,7 @@ public void alertLang()
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 Editor editor = mPrefs.edit();
-                String lang = items[item].toString();
+                lang = items[item].toString();
                 editor.putString(KEY_LANG, lang);
                 editor.commit();
                // Toast.makeText(getApplicationContext(), tmp+" lol", Toast.LENGTH_SHORT).show();
@@ -110,15 +120,27 @@ public void alertColors()
         builder.setTitle("Pick a color and click 'back'");
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
+                
                 if(item == 0) //custom
                 {
                     alertCustom();
                 }
+                if(item == 1) //red
+                {
+                    color = "255;0;0";
+                }
+                if(item == 2) //green
+                {
+                    color = "0;255;0";
+                }
+                if(item == 3) //blue
+                {
+                    color = "0;0;255";
+                }
                 Editor editor = mPrefs.edit();
-                String color = items[item].toString();
                 editor.putString(KEY_COL, color);
                 editor.commit();
-               // Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_COL, null), Toast.LENGTH_SHORT).show();
             }
         });
         AlertDialog alert = builder.create();
