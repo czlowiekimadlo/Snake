@@ -29,7 +29,7 @@ public final class R {
         public static final int keyleft=0x7f080003;
         public static final int keyright=0x7f080004;
         public static final int newGame=0x7f080005;
-        public static final int pauseButton=0x7f080001;
+        public static final int onPause=0x7f080001;
         public static final int settings=0x7f080008;
         public static final int widget37=0x7f080000;
     }
@@ -40,8 +40,9 @@ public final class R {
         public static final int test=0x7f030003;
     }
     public static final class raw {
-        public static final int starwars=0x7f040000;
-        public static final int terminator=0x7f040001;
+        public static final int maintheme=0x7f040000;
+        public static final int snake_eats=0x7f040001;
+        public static final int snake_lost=0x7f040002;
     }
     public static final class string {
         public static final int app_name=0x7f050001;

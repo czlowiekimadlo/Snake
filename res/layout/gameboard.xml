@@ -6,7 +6,8 @@
 	android:layout_height="fill_parent"
 	xmlns:android="http://schemas.android.com/apk/res/android">
 <Button
-	android:id="@+id/pauseButton"
+	android:id="@+id/onPause"
+        android:onClick="onClickPause"
         android:layout_width="70px"
         android:layout_height="70px"
 	android:text="||"
@@ -16,6 +17,7 @@
 	android:layout_y="0dp" />
 <Button
 	android:id="@+id/exitButton"
+        android:onClick="onClickExit"
 	android:layout_width="70px"
 	android:layout_height="70px"
 	android:text="X"
@@ -24,10 +26,10 @@
 	android:layout_y="0dp" />
 <ImageButton
         android:id="@+id/keyleft"
+        android:onClick="onClickLeft"
         android:clickable="true"
         android:layout_height="80dp"
         android:layout_width="80dp"
-        android:onClick="keyleft"
         android:layout_alignParentLeft="true"
         android:background="@drawable/left"
         android:layout_x="0dp"
@@ -35,10 +37,10 @@
     />
 <ImageButton
         android:id="@+id/keyright"
+        android:onClick="onClickRight"
         android:clickable="true"
         android:layout_height="80dp"
         android:layout_width="80dp"
-        android:onClick="keyright"
         android:layout_alignParentLeft="true"
         android:background="@drawable/right"
         android:layout_x="240dp"

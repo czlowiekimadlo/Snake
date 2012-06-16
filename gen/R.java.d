@@ -8,8 +8,9 @@ C:\Users\AnitkA\Snake\S\res\layout\gameboard.xml \
 C:\Users\AnitkA\Snake\S\res\layout\gamesettings.xml \
 C:\Users\AnitkA\Snake\S\res\layout\main.xml \
 C:\Users\AnitkA\Snake\S\res\layout\test.xml \
-C:\Users\AnitkA\Snake\S\res\raw\starwars.wav \
-C:\Users\AnitkA\Snake\S\res\raw\terminator.wav \
+C:\Users\AnitkA\Snake\S\res\raw\maintheme.mp3 \
+C:\Users\AnitkA\Snake\S\res\raw\snake_eats.mp3 \
+C:\Users\AnitkA\Snake\S\res\raw\snake_lost.mp3 \
 C:\Users\AnitkA\Snake\S\res\values\strings.xml \
 C:\Users\AnitkA\Snake\S\bin\res\drawable\left.png \
 C:\Users\AnitkA\Snake\S\bin\res\drawable\right.png \
