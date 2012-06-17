@@ -9,4 +9,5 @@
         <item>Sounds</item>
     </string-array>
     <color name="green">#008000</color>
+    <string name="sett">Game Settings</string>
 </resources>

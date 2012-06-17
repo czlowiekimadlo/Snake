@@ -39,7 +39,7 @@ public class SnakeActivity extends Activity {
 	public void onClick4(View view) {
 
 		Intent i = getIntent();
-		i.setClass(view.getContext(), ActivityViewHighScores.class);
+		i.setClass(view.getContext(), ActivityViewSettings.class);
 		startActivity(i);
 	}
 

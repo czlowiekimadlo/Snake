@@ -91,7 +91,7 @@ public class ActivityGameBoard extends Activity {
                        public void onClick(DialogInterface dialog, int id) {
                             Intent i = new Intent(ActivityGameBoard.this, SnakeActivity.class);
                             //i.setClass(view.getContext(), SnakeActivity.class);
-                            startActivity(i); // tu się wiesza. WHY???
+                            startActivity(i); 
                             //ActivityGameBoard.this.finish();
                        }
                    })

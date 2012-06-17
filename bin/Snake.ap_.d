@@ -5,8 +5,8 @@ C:\Users\AnitkA\Snake\S\res\drawable-hdpi\ic_launcher.png \
 C:\Users\AnitkA\Snake\S\res\drawable-ldpi\ic_launcher.png \
 C:\Users\AnitkA\Snake\S\res\drawable-mdpi\ic_launcher.png \
 C:\Users\AnitkA\Snake\S\res\layout\gameboard.xml \
-C:\Users\AnitkA\Snake\S\res\layout\gamesettings.xml \
 C:\Users\AnitkA\Snake\S\res\layout\main.xml \
+C:\Users\AnitkA\Snake\S\res\layout\settings.xml \
 C:\Users\AnitkA\Snake\S\res\layout\test.xml \
 C:\Users\AnitkA\Snake\S\res\raw\maintheme.mp3 \
 C:\Users\AnitkA\Snake\S\res\raw\snake_eats.mp3 \
