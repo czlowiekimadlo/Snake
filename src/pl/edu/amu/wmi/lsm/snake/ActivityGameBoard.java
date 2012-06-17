@@ -90,8 +90,8 @@ public class ActivityGameBoard extends Activity {
                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
                             Intent i = new Intent(ActivityGameBoard.this, SnakeActivity.class);
-                            //poi.setClass(getApplicationContext(), ActivityContinueGame.class);
-                            startActivity(i);
+                            //i.setClass(view.getContext(), SnakeActivity.class);
+                            startActivity(i); // tu się wiesza. WHY???
                             //ActivityGameBoard.this.finish();
                        }
                    })
@@ -112,6 +112,9 @@ public class ActivityGameBoard extends Activity {
 
 	}
 
+        private void alertExit() {
+
+        }
 
 public int[] convertStringArraytoIntArray(String[] sarray) throws Exception {
     if (sarray != null) {
