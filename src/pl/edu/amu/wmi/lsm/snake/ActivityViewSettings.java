@@ -52,10 +52,12 @@ public class ActivityViewSettings extends ListActivity  {
                     break;
                 case 3: // powrot do glownego
                     Intent i = new Intent(ActivityViewSettings.this, SnakeActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                   Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_COL, " ")+" lol", Toast.LENGTH_SHORT).show();
+
                     i.putExtra(KEY_COL, mPrefs.getString(KEY_COL, "0;255;0"));
-                    i.putExtra(KEY_LANG, mPrefs.getString(KEY_LANG, "ENG"));
-                    i.putExtra(KEY_SOUND, mPrefs.getBoolean(KEY_SOUND, true));
+//                    i.putExtra(KEY_LANG, mPrefs.getString(KEY_LANG, "ENG"));
+//                    i.putExtra(KEY_SOUND, mPrefs.getBoolean(KEY_SOUND, true));
                     startActivity(i);
                     break;
             }
@@ -82,6 +84,11 @@ public class ActivityViewSettings extends ListActivity  {
             lang = savedIS.getString(KEY_LANG);
             sound = savedIS.getBoolean(KEY_SOUND);
     }
+
+//    @Override
+//    protected void onPause() {
+//        savePreferences(KEY_COL, color);
+//    }
 
 public void alertLang()
     {
@@ -132,9 +139,10 @@ public void alertColors()
                 {
                     color = "0;0;255";
                 }
-                Editor editor = mPrefs.edit();
-                editor.putString(KEY_COL, color);
-                editor.commit();
+//                Editor editor = mPrefs.edit();
+//                editor.putString(KEY_COL, color);
+//                editor.commit();
+                savePreferences(KEY_COL, color);
                 dialog.dismiss();
                 //Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_COL, null), Toast.LENGTH_SHORT).show();
             }
@@ -183,6 +191,14 @@ public void alertCustom()
        });
     AlertDialog alert = builder.create();
     alert.show();
+}
+
+private void savePreferences(String key, String value) {
+    //SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+   // SharedPreferences.Editor editor = sharedPreferences.edit();
+    SharedPreferences.Editor editor = mPrefs.edit();
+    editor.putString(key, value);
+    editor.commit();
 }
 
 public static int safeLongToInt(long l) {

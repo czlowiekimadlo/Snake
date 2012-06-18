@@ -38,7 +38,9 @@ public class ActivityGameBoard extends Activity {
 		setContentView(R.layout.gameboard);
                 sp = this.getApplicationContext().getSharedPreferences(SHARED_PREFERENCE, Activity.MODE_PRIVATE);
 
+
                   String tmp = sp.getString(KEY_COL, "");
+                  tmp = loadPreferences(KEY_COL);
                 Toast.makeText(getApplicationContext(), tmp.toString() ,Toast.LENGTH_SHORT).show();
 
                 String[] colors = sp.getString(KEY_COL, "0;255;0").split(";");
@@ -117,6 +119,12 @@ public class ActivityGameBoard extends Activity {
 
         private void alertExit() {
 
+        }
+
+        private String loadPreferences(String key) {
+            SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+            String loadedString = sharedPreferences.getString(key, "");
+            return loadedString;
         }
 
 public int[] convertStringArraytoIntArray(String[] sarray) throws Exception {
