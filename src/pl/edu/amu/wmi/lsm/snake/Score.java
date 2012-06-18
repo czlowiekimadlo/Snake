@@ -22,6 +22,11 @@ public class Score {
 		this._name = name;
 		this._score = score;
 	}
+	
+	public Score(Integer score) { //dodatkowy konstruktor tylko dla samego wyniku
+
+		this._score = score;
+	}
 
 	public Integer getID() {
 
