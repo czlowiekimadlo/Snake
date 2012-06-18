@@ -38,12 +38,16 @@ public class ActivityGameBoard extends Activity {
 		setContentView(R.layout.gameboard);
                 sp = this.getApplicationContext().getSharedPreferences(SHARED_PREFERENCE, Activity.MODE_PRIVATE);
 
+            Intent j = getIntent();
+            Bundle bundle = j.getExtras();
+            String value = bundle.getString(KEY_COL);
 
                   String tmp = sp.getString(KEY_COL, "");
                   tmp = loadPreferences(KEY_COL);
-                Toast.makeText(getApplicationContext(), tmp.toString() ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), value ,Toast.LENGTH_SHORT).show();
 
-                String[] colors = sp.getString(KEY_COL, "0;255;0").split(";");
+                //String[] colors = sp.getString(KEY_COL, "0;255;0").split(";");
+                String[] colors = value.split(";");
                 int[] kolory = null;
                 try {
                     kolory = convertStringArraytoIntArray(colors);

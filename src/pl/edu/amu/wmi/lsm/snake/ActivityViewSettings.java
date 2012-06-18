@@ -30,6 +30,7 @@ public class ActivityViewSettings extends ListActivity  {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.settings);
+
                 mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
                 String[] settings = getResources().getStringArray(R.array.settings_array);
                 setListAdapter(new ArrayAdapter<String>(this, R.layout.settings, settings));
@@ -53,7 +54,7 @@ public class ActivityViewSettings extends ListActivity  {
                 case 3: // powrot do glownego
                     Intent i = new Intent(ActivityViewSettings.this, SnakeActivity.class);
 //                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                   Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_COL, " ")+" lol", Toast.LENGTH_SHORT).show();
+                   //Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_COL, " ")+" lol", Toast.LENGTH_SHORT).show();
 
                     i.putExtra(KEY_COL, mPrefs.getString(KEY_COL, "0;255;0"));
 //                    i.putExtra(KEY_LANG, mPrefs.getString(KEY_LANG, "ENG"));

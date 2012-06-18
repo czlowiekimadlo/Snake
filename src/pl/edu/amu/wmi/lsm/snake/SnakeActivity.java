@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SnakeActivity extends Activity {
+    private final String KEY_COL = "color";
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -16,8 +18,14 @@ public class SnakeActivity extends Activity {
 	}
 
 	public void onClick(View view) {
+            Intent j = getIntent();
+            Bundle bundle = j.getExtras();
+            String value = bundle.getString(KEY_COL);
 
 		Intent i = new Intent(this, ActivityGameBoard.class);
+                i.putExtra(KEY_COL, value);
+                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+
             //Intent i = new Intent(this, ActivityNewGame.class);
 		//i.setClass(view.getContext(), ActivityNewGame.class);
 		startActivity(i);
