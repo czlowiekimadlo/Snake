@@ -5,20 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 public class SnakeActivity extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// mojsaidas
+	
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		ImageView image = (ImageView) findViewById(R.id.main_image);
 	}
 
 	public void onClick(View view) {
 
 		Intent i = new Intent(this, ActivityNewGame.class);
-		//i.setClass(view.getContext(), ActivityNewGame.class);
 		startActivity(i);
 	}
 
