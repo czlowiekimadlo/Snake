@@ -20,88 +20,97 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * 
  * @author AnitkA
  */
 public class ActivityGameBoard extends Activity {
-   private SharedPreferences sp;
-   private final String SHARED_PREFERENCE = "Settings";
-   private final String KEY_LANG = "lang";
-   private final String KEY_COL = "color";
-   private final String KEY_SOUND = "sound";
-   private final String KEY_IS_PAUSE = "isPause";
-   private MediaPlayer mediaPlayer;
+	private SharedPreferences sp;
+	private final String SHARED_PREFERENCE = "Settings";
+	private final String KEY_LANG = "lang";
+	private final String KEY_COL = "color";
+	private final String KEY_SOUND = "sound";
+	private final String KEY_IS_PAUSE = "isPause";
+	private MediaPlayer mediaPlayer;
 
 	public void onCreate(Bundle savedInstanceState) {
-                View view = this.findViewById(android.R.id.content);
+		View view = this.findViewById(android.R.id.content);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.gameboard);
-                sp = this.getApplicationContext().getSharedPreferences(SHARED_PREFERENCE, Activity.MODE_PRIVATE);
-                
-                String[] colors = sp.getString(KEY_COL, "0;255;0").split(";");
-                int[] kolory = null;
-                try {
-                    kolory = convertStringArraytoIntArray(colors);
-                } catch (Exception ex) {
-                    Logger.getLogger(ActivityGameBoard.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                view.setBackgroundColor(Color.rgb(kolory[0],kolory[1],kolory[2]));
+		sp = this.getApplicationContext().getSharedPreferences(
+				SHARED_PREFERENCE, Activity.MODE_PRIVATE);
 
-                //Boolean tmp = sp.getBoolean(KEY_SOUND, true);
-                //Toast.makeText(getApplicationContext(), tmp.toString() ,Toast.LENGTH_SHORT).show();
-                if(sp.getBoolean(KEY_SOUND, true)) //dzwiek
-                {
-                    mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.maintheme);
-                    mediaPlayer.start(); // no need to call prepare(); create() does that for you
-                }
-                else  //bez dzwieku
-                {
+		String[] colors = sp.getString(KEY_COL, "0;255;0").split(";");
+		int[] kolory = null;
+		try {
+			kolory = convertStringArraytoIntArray(colors);
+		} catch (Exception ex) {
+			Logger.getLogger(ActivityGameBoard.class.getName()).log(
+					Level.SEVERE, null, ex);
+		}
+		view.setBackgroundColor(Color.rgb(kolory[0], kolory[1], kolory[2]));
 
-                }
-	}
-	
-        @Override
-        public void onPause() {
-            super.onPause();  // Always call the superclass method first
-            Editor ed = sp.edit();
-            ed.putBoolean(KEY_IS_PAUSE, true);
-            ed.commit();
-            mediaPlayer.pause();
-        }
+		// Boolean tmp = sp.getBoolean(KEY_SOUND, true);
+		// Toast.makeText(getApplicationContext(), tmp.toString()
+		// ,Toast.LENGTH_SHORT).show();
+		if (sp.getBoolean(KEY_SOUND, true)) // dzwiek
+		{
+			mediaPlayer = MediaPlayer.create(getApplicationContext(),
+					R.raw.maintheme);
+			mediaPlayer.start(); // no need to call prepare(); create() does
+									// that for you
+		} else // bez dzwieku
+		{
 
-        @Override
-        public void onResume() {
-            super.onResume();  // Always call the superclass method first
-            Editor ed = sp.edit();
-            ed.putBoolean(KEY_IS_PAUSE, false);
-            ed.commit();
-            mediaPlayer.start();
-        }
-
-        public void onClickPause(View view) {
-            if (!sp.getBoolean(KEY_IS_PAUSE, false)) onPause();
-            else onResume();
+		}
 	}
 
-	public void onClickExit(View view) { //exit
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Are you sure you want to exit?")
-                   .setCancelable(false)
-                   .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                       public void onClick(DialogInterface dialog, int id) {
-                            Intent i = new Intent(ActivityGameBoard.this, SnakeActivity.class);
-                            //i.setClass(view.getContext(), SnakeActivity.class);
-                            startActivity(i); // tu się wiesza. WHY???
-                            //ActivityGameBoard.this.finish();
-                       }
-                   })
-                   .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                       public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                       }
-                   });
-            AlertDialog alert = builder.create();
-            alert.show();
+	@Override
+	public void onPause() {
+		super.onPause(); // Always call the superclass method first
+		Editor ed = sp.edit();
+		ed.putBoolean(KEY_IS_PAUSE, true);
+		ed.commit();
+		mediaPlayer.pause();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume(); // Always call the superclass method first
+		Editor ed = sp.edit();
+		ed.putBoolean(KEY_IS_PAUSE, false);
+		ed.commit();
+		mediaPlayer.start();
+	}
+
+	public void onClickPause(View view) {
+		if (!sp.getBoolean(KEY_IS_PAUSE, false))
+			onPause();
+		else
+			onResume();
+	}
+
+	public void onClickExit(View view) { // exit
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Are you sure you want to exit?")
+				.setCancelable(false)
+				.setPositiveButton("Yes",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								Intent i = new Intent(ActivityGameBoard.this,
+										SnakeActivity.class);
+								// i.setClass(view.getContext(),
+								// SnakeActivity.class);
+								startActivity(i); // tu się wiesza. WHY???
+								// ActivityGameBoard.this.finish();
+							}
+						})
+				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+		AlertDialog alert = builder.create();
+		alert.show();
 	}
 
 	public void onClickLeft(View view) {
@@ -112,18 +121,18 @@ public class ActivityGameBoard extends Activity {
 
 	}
 
-        private void alertExit() {
+	private void alertExit() {
 
-        }
+	}
 
-public int[] convertStringArraytoIntArray(String[] sarray) throws Exception {
-    if (sarray != null) {
-    int intarray[] = new int[sarray.length];
-    for (int i = 0; i < sarray.length; i++) {
-    intarray[i] = Integer.parseInt(sarray[i]);
-    }
-    return intarray;
-    }
-    return null;
-    }
+	public int[] convertStringArraytoIntArray(String[] sarray) throws Exception {
+		if (sarray != null) {
+			int intarray[] = new int[sarray.length];
+			for (int i = 0; i < sarray.length; i++) {
+				intarray[i] = Integer.parseInt(sarray[i]);
+			}
+			return intarray;
+		}
+		return null;
+	}
 }
