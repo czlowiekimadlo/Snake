@@ -42,9 +42,9 @@ public class ActivityGameBoard extends Activity {
             Bundle bundle = j.getExtras();
             String value = bundle.getString(KEY_COL);
 
-                  String tmp = sp.getString(KEY_COL, "");
-                  tmp = loadPreferences(KEY_COL);
-                Toast.makeText(getApplicationContext(), value ,Toast.LENGTH_SHORT).show();
+//                  String tmp = sp.getString(KEY_COL, "");
+//                  tmp = loadPreferences(KEY_COL);
+//                Toast.makeText(getApplicationContext(), value ,Toast.LENGTH_SHORT).show();
 
                 //String[] colors = sp.getString(KEY_COL, "0;255;0").split(";");
                 String[] colors = value.split(";");
