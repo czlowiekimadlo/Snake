@@ -3,6 +3,7 @@ package pl.edu.amu.wmi.lsm.snake;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class ActivityViewSettings extends ListActivity  {
    private SharedPreferences mPrefs;
@@ -48,6 +50,10 @@ public class ActivityViewSettings extends ListActivity  {
                 case 2: // sounds
                     alertSounds();
                     break;
+                case 3: // \
+                    Intent i = new Intent(ActivityViewSettings.this, SnakeActivity.class);
+                    startActivity(i);
+                    break;
             }
 //          Toast.makeText(getApplicationContext(), ((TextView) view).getText() ,
 //              Toast.LENGTH_SHORT).show();
@@ -80,13 +86,14 @@ public void alertLang()
         final CharSequence[] items = {"PL", "EN"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Pick a language and click 'back'");
+        builder.setTitle("Pick a language");
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 Editor editor = mPrefs.edit();
                 lang = items[item].toString();
                 editor.putString(KEY_LANG, lang);
                 editor.commit();
+                dialog.dismiss();
                // Toast.makeText(getApplicationContext(), tmp+" lol", Toast.LENGTH_SHORT).show();
             }
         });
@@ -103,7 +110,7 @@ public void alertColors()
         final CharSequence[] items = {"Custom", "Red", "Green", "Blue"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Pick a color and click 'back'");
+        builder.setTitle("Pick a color");
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
 
@@ -126,6 +133,7 @@ public void alertColors()
                 Editor editor = mPrefs.edit();
                 editor.putString(KEY_COL, color);
                 editor.commit();
+                dialog.dismiss();
                 //Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_COL, null), Toast.LENGTH_SHORT).show();
             }
         });

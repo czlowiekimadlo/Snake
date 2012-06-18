@@ -17,7 +17,8 @@ public class SnakeActivity extends Activity {
 
 	public void onClick(View view) {
 
-		Intent i = new Intent(this, ActivityNewGame.class);
+		Intent i = new Intent(this, ActivityGameBoard.class);
+            //Intent i = new Intent(this, ActivityNewGame.class);
 		//i.setClass(view.getContext(), ActivityNewGame.class);
 		startActivity(i);
 	}

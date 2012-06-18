@@ -7,6 +7,7 @@
         <item>Change color theme</item>
         <item>Change language</item>
         <item>Sounds</item>
+        <item>Back</item>
     </string-array>
     <color name="green">#008000</color>
     <string name="sett">Game Settings</string>

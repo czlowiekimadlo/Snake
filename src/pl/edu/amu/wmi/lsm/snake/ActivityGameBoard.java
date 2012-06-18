@@ -37,7 +37,10 @@ public class ActivityGameBoard extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.gameboard);
                 sp = this.getApplicationContext().getSharedPreferences(SHARED_PREFERENCE, Activity.MODE_PRIVATE);
-                
+
+                  String tmp = sp.getString(KEY_COL, "");
+                Toast.makeText(getApplicationContext(), tmp.toString() ,Toast.LENGTH_SHORT).show();
+
                 String[] colors = sp.getString(KEY_COL, "0;255;0").split(";");
                 int[] kolory = null;
                 try {
@@ -47,7 +50,7 @@ public class ActivityGameBoard extends Activity {
                 }
                 view.setBackgroundColor(Color.rgb(kolory[0],kolory[1],kolory[2]));
 
-                //Boolean tmp = sp.getBoolean(KEY_SOUND, true);
+                //Boolean tmp = sp.getBoolean(KEY_SOUND, );
                 //Toast.makeText(getApplicationContext(), tmp.toString() ,Toast.LENGTH_SHORT).show();
                 if(sp.getBoolean(KEY_SOUND, true)) //dzwiek
                 {
