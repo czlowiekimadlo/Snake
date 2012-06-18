@@ -50,7 +50,7 @@ public class ActivityViewSettings extends ListActivity  {
                 case 2: // sounds
                     alertSounds();
                     break;
-                case 3: // \
+                case 3: // powrot do glownego
                     Intent i = new Intent(ActivityViewSettings.this, SnakeActivity.class);
                     startActivity(i);
                     break;
