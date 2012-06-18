@@ -52,6 +52,10 @@ public class ActivityViewSettings extends ListActivity  {
                     break;
                 case 3: // powrot do glownego
                     Intent i = new Intent(ActivityViewSettings.this, SnakeActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    i.putExtra(KEY_COL, mPrefs.getString(KEY_COL, "0;255;0"));
+                    i.putExtra(KEY_LANG, mPrefs.getString(KEY_LANG, "ENG"));
+                    i.putExtra(KEY_SOUND, mPrefs.getBoolean(KEY_SOUND, true));
                     startActivity(i);
                     break;
             }
@@ -61,8 +65,6 @@ public class ActivityViewSettings extends ListActivity  {
         }
       });
     }
-
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
