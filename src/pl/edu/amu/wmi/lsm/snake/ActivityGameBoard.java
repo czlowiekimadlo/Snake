@@ -40,14 +40,11 @@ public class ActivityGameBoard extends Activity {
 
             Intent j = getIntent();
             Bundle bundle = j.getExtras();
-            String value = bundle.getString(KEY_COL);
+            String valueC = bundle.getString(KEY_COL);
+            String valueL = bundle.getString(KEY_LANG);
+            Boolean valueS = bundle.getBoolean(KEY_SOUND);
 
-//                  String tmp = sp.getString(KEY_COL, "");
-//                  tmp = loadPreferences(KEY_COL);
-//                Toast.makeText(getApplicationContext(), value ,Toast.LENGTH_SHORT).show();
-
-                //String[] colors = sp.getString(KEY_COL, "0;255;0").split(";");
-                String[] colors = value.split(";");
+                String[] colors = valueC.split(";");
                 int[] kolory = null;
                 try {
                     kolory = convertStringArraytoIntArray(colors);
@@ -56,17 +53,15 @@ public class ActivityGameBoard extends Activity {
                 }
                 view.setBackgroundColor(Color.rgb(kolory[0],kolory[1],kolory[2]));
 
-                //Boolean tmp = sp.getBoolean(KEY_SOUND, );
-                //Toast.makeText(getApplicationContext(), tmp.toString() ,Toast.LENGTH_SHORT).show();
-                if(sp.getBoolean(KEY_SOUND, true)) //dzwiek
+                if(valueS) //dzwiek
                 {
                     mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.maintheme);
                     mediaPlayer.start(); // no need to call prepare(); create() does that for you
                 }
-                else  //bez dzwieku
-                {
-
-                }
+//                else  //bez dzwieku
+//                {
+//
+//                }
 	}
 	
         @Override

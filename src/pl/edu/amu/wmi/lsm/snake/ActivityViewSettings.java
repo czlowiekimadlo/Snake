@@ -13,7 +13,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityViewSettings extends ListActivity  {
@@ -53,18 +55,16 @@ public class ActivityViewSettings extends ListActivity  {
                     break;
                 case 3: // powrot do glownego
                     Intent i = new Intent(ActivityViewSettings.this, SnakeActivity.class);
-//                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    //i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                    //Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_COL, " ")+" lol", Toast.LENGTH_SHORT).show();
 
                     i.putExtra(KEY_COL, mPrefs.getString(KEY_COL, "0;255;0"));
-//                    i.putExtra(KEY_LANG, mPrefs.getString(KEY_LANG, "ENG"));
-//                    i.putExtra(KEY_SOUND, mPrefs.getBoolean(KEY_SOUND, true));
+                    i.putExtra(KEY_LANG, mPrefs.getString(KEY_LANG, "ENG"));
+                    i.putExtra(KEY_SOUND, mPrefs.getBoolean(KEY_SOUND, true));
                     startActivity(i);
                     break;
-            }
-//          Toast.makeText(getApplicationContext(), ((TextView) view).getText() ,
-//              Toast.LENGTH_SHORT).show();
-
+            }            
+          //Toast.makeText(getApplicationContext(), b.toString() ,Toast.LENGTH_SHORT).show();
         }
       });
     }
@@ -160,14 +160,14 @@ public void alertSounds()
            .setPositiveButton("On", new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
                    Editor editor = mPrefs.edit();
-                   editor.putString(KEY_SOUND, "1");
+                   editor.putBoolean(KEY_SOUND, true);
                    editor.commit();
                }
            })
            .setNegativeButton("Off", new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
                    Editor editor = mPrefs.edit();
-                   editor.putString(KEY_SOUND, "0");
+                   editor.putBoolean(KEY_SOUND, false);
                    editor.commit();
                }
            });
@@ -177,21 +177,48 @@ public void alertSounds()
 
 public void alertCustom()
     {
-    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setMessage("Not yet. Sorry...")
-       .setCancelable(false)
-       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-           public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-           }
-       })
-       .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-           public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-           }
-       });
-    AlertDialog alert = builder.create();
-    alert.show();
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        TextView txtR = new TextView(this);
+        alert.setTitle("dasda");
+                        final EditText inputR = new EditText(this);
+                        alert.setView(inputR);
+                        final EditText inputG = new EditText(this);
+                        alert.setView(inputG);
+                        final EditText inputB = new EditText(this);
+                        alert.setView(inputB);
+                        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            String valueR = inputR.getText().toString().trim();
+                            String valueG = inputG.getText().toString().trim();
+                            String valueB = inputB.getText().toString().trim();
+                                Toast.makeText(getApplicationContext(), valueR,
+                                        Toast.LENGTH_SHORT).show();
+                   }
+                    });
+
+               alert.setNegativeButton("Cancel",
+                   new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                    dialog.cancel();
+                            }
+                            });
+                    alert.show();
+
+//    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//    builder.setMessage("Not yet. Sorry...")
+//       .setCancelable(false)
+//       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//           public void onClick(DialogInterface dialog, int id) {
+//                dialog.cancel();
+//           }
+//       })
+//       .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//           public void onClick(DialogInterface dialog, int id) {
+//                dialog.cancel();
+//           }
+//       });
+//    AlertDialog alert = builder.create();
+//    alert.show();
 }
 
 private void savePreferences(String key, String value) {

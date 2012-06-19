@@ -9,26 +9,38 @@ import android.widget.Toast;
 
 public class SnakeActivity extends Activity {
     private final String KEY_COL = "color";
+    private final String KEY_LANG = "lang";
+    private final String KEY_SOUND = "sound";
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// mojsaidas
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+
+//                            Intent j = getIntent();
+//            Bundle bundle = j.getExtras();
+//            Object valueSound = bundle.get(KEY_SOUND);
+            //Toast.makeText(getApplicationContext(), valueSound.toString() ,Toast.LENGTH_SHORT).show();
+
 	}
 
 	public void onClick(View view) {
             Intent j = getIntent();
             Bundle bundle = j.getExtras();
-            String value = bundle.getString(KEY_COL);
+            String valueCol = bundle.getString(KEY_COL);
+            String valueLang = bundle.getString(KEY_LANG);
+            Boolean valueSound = bundle.getBoolean(KEY_SOUND);
 
-		Intent i = new Intent(this, ActivityGameBoard.class);
-                i.putExtra(KEY_COL, value);
-                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this, ActivityGameBoard.class);
+            i.putExtra(KEY_COL, valueCol);
+            i.putExtra(KEY_LANG, valueLang);
+            i.putExtra(KEY_SOUND, valueSound);
+            Toast.makeText(getApplicationContext(), valueSound.toString(), Toast.LENGTH_SHORT).show();
 
             //Intent i = new Intent(this, ActivityNewGame.class);
 		//i.setClass(view.getContext(), ActivityNewGame.class);
-		startActivity(i);
+            startActivity(i);
 	}
 
 	public void onClick2(View view) {
