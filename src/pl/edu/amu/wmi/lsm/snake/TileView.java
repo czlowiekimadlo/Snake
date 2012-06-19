@@ -23,6 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 
@@ -98,12 +99,16 @@ public class TileView extends View {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    	Log.v("INFO", "snake view size setup");
+    	Log.v("INFO", Integer.toString(w));
+    	Log.v("INFO", Integer.toString(h));
         mXTileCount = (int) Math.floor(w / mTileSize);
         mYTileCount = (int) Math.floor(h / mTileSize);
-
+        
         mXOffset = ((w - (mTileSize * mXTileCount)) / 2);
         mYOffset = ((h - (mTileSize * mYTileCount)) / 2);
-
+        Log.v("INFO", Integer.toString(mXTileCount));
+    	Log.v("INFO", Integer.toString(mYTileCount));
         mTileGrid = new int[mXTileCount][mYTileCount];
         clearTiles();
     }
@@ -152,6 +157,7 @@ public class TileView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
+    	Log.v("INFO", "snake view draw");
         super.onDraw(canvas);
         for (int x = 0; x < mXTileCount; x += 1) {
             for (int y = 0; y < mYTileCount; y += 1) {

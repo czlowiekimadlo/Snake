@@ -14,13 +14,14 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import pl.edu.amu.wmi.lsm.snake.R;
-import pl.edu.amu.wmi.lsm.snake.SnakeView;
+import pl.edu.amu.wmi.lsm.snake.UberSnakeView;
 
 /**
  *
@@ -28,11 +29,12 @@ import pl.edu.amu.wmi.lsm.snake.SnakeView;
  */
 public class ActivityGameBoard extends Activity {
    private SharedPreferences sp;
-   private SnakeView mSnakeView;
+   private UberSnakeView snakeView;
    private final String SHARED_PREFERENCE = "Settings";
    private final String KEY_LANG = "lang";
    private final String KEY_COL = "color";
    private final String KEY_SOUND = "sound";
+   private final String KEY_RESTART = "restart";
    private final String KEY_IS_PAUSE = "isPause";
    private static String ICICLE_KEY = "snake-view";
    private MediaPlayer mediaPlayer;
@@ -43,33 +45,39 @@ public class ActivityGameBoard extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.gameboard);
                //sp = this.getApplicationContext().getSharedPreferences(SHARED_PREFERENCE, Activity.MODE_PRIVATE);
-
+		Log.v("INFO", "game board create");
                 try 
                 {
                 Intent j = getIntent();
                 Bundle bundle = j.getExtras();
                 String valueC = bundle.getString(KEY_COL);
                 String valueL = bundle.getString(KEY_LANG);
+                Boolean valueR = bundle.getBoolean(KEY_RESTART);
                 //Boolean valueS = bundle.getBoolean(KEY_SOUND);
                 
-                mSnakeView = (SnakeView) findViewById(R.id.snake);
+                if (valueR) {
+                	this.snakeView.resetGame();
+                }
+                }
+                catch(Exception e) {
+                	Log.v("ERROR", e.toString());
+                }
+                
+                snakeView = (UberSnakeView) findViewById(R.id.snake);
                 if (savedInstanceState == null) {
                     // We were just launched -- set up a new game
-                    mSnakeView.setMode(SnakeView.READY);
+                	snakeView.setMode(SnakeView.READY);
                 } else {
                     // We are being restored
                     Bundle map = savedInstanceState.getBundle(ICICLE_KEY);
                     if (map != null) {
-                        mSnakeView.restoreState(map);
+                    	//snakeView.restoreState(map);
                     } else {
-                        mSnakeView.setMode(SnakeView.PAUSE);
+                    	snakeView.setMode(SnakeView.READY);
                     }
                 }
                 
-                }
-                catch(Exception e) {
-                    Toast.makeText(getApplicationContext(), "blablA" ,Toast.LENGTH_SHORT).show();
-                }
+                
                 
 //                String[] colors = valueC.split(";");
 //                int[] kolory = null;
@@ -132,11 +140,11 @@ public class ActivityGameBoard extends Activity {
 	}
 
 	public void onClickLeft(View view) {
-
+		this.snakeView.goLeft();
 	}
 
 	public void onClickRight(View view) {
-
+		this.snakeView.goRight();
 	}
 
     private void alertExit() {

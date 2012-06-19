@@ -137,6 +137,7 @@ public class SnakeView extends TileView {
 
     private void initSnakeView() {
         setFocusable(true);
+        requestFocus();
 
         Resources r = this.getContext().getResources();
         
@@ -257,7 +258,7 @@ public class SnakeView extends TileView {
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent msg) {
-
+    	Log.v("KEY", Integer.toString(keyCode));
         if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
             if (mMode == READY | mMode == LOSE) {
                 /*

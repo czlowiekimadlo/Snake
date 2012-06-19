@@ -10,6 +10,7 @@ public class SnakeActivity extends Activity {
     private final String KEY_COL = "color";
     private final String KEY_LANG = "lang";
     private final String KEY_SOUND = "sound";
+    private final String KEY_RESTART = "restart";
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class SnakeActivity extends Activity {
            // Boolean valueSound = bundle.getBoolean(KEY_SOUND);
             i.putExtra(KEY_COL, valueCol);
             i.putExtra(KEY_LANG, valueLang);
+            i.putExtra(KEY_RESTART, true);
             //i.putExtra(KEY_SOUND, valueSound);
             }
             catch(Exception e)
@@ -42,6 +44,7 @@ public class SnakeActivity extends Activity {
 
 		Intent i = getIntent();
 		i.setClass(view.getContext(), ActivityGameBoard.class);
+		i.putExtra(KEY_RESTART, false);
 		startActivity(i);
 	}
 

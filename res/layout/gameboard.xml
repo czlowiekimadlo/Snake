@@ -4,15 +4,17 @@
 	android:id="@+id/widget37"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android">
-	<pl.edu.amu.wmi.lsm.snake.SnakeView
-	 android:id="@+id/snake"
-		android:layout_width="match_parent"
-                android:layout_height="500px"
-                tileSize="24"
-                android:layout_x="0dp"
-                android:layout_y="70px"
-                />
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:focusable="false" android:focusableInTouchMode="false">
+
+	<pl.edu.amu.wmi.lsm.snake.UberSnakeView
+	    android:id="@+id/snake"
+	    android:layout_width="match_parent"
+	    android:layout_height="366dp"
+	    android:layout_x="0dp"
+	    android:layout_y="42dp"
+	    tileSize="12" android:focusable="true" android:focusableInTouchMode="true" android:visibility="visible" android:nextFocusDown="@id/snake" android:nextFocusLeft="@id/snake" android:nextFocusRight="@id/snake" android:nextFocusUp="@id/snake"/>
+
 <Button
 	android:id="@+id/onPause"
         android:onClick="onClickPause"
@@ -22,7 +24,7 @@
 	android:textStyle="bold"
 	android:gravity="center"
 	android:layout_x="0dp"
-	android:layout_y="0dp" />
+	android:layout_y="0dp" android:focusable="false" android:focusableInTouchMode="false"/>
 <Button
 	android:id="@+id/exitButton"
         android:onClick="onClickExit"
@@ -31,7 +33,7 @@
 	android:text="X"
 	android:textStyle="bold"
 	android:layout_x="275dp"
-	android:layout_y="0dp" />
+	android:layout_y="0dp" android:focusable="false" android:focusableInTouchMode="false"/>
 <ImageButton
         android:id="@+id/keyleft"
         android:onClick="onClickLeft"
@@ -42,7 +44,7 @@
         android:background="@drawable/left"
         android:layout_x="0dp"
 	android:layout_y="410dp"
-    />
+    android:focusable="false" android:focusableInTouchMode="false"/>
 <ImageButton
         android:id="@+id/keyright"
         android:onClick="onClickRight"
@@ -53,5 +55,5 @@
         android:background="@drawable/right"
         android:layout_x="240dp"
 	android:layout_y="410dp"
-    />
+    android:focusable="false" android:focusableInTouchMode="false"/>
 </AbsoluteLayout>
