@@ -20,16 +20,22 @@ public class SnakeActivity extends Activity {
 	}
 
 	public void onClick(View view) {
+            Intent i = new Intent();
+            i.setClass(view.getContext(), ActivityGameBoard.class);
+            try
+            {
             Intent j = getIntent();
             Bundle bundle = j.getExtras();
             String valueCol = bundle.getString(KEY_COL);
             String valueLang = bundle.getString(KEY_LANG);
-           // Boolean valueSound = bundle.getBoolean(KEY_SOUND);
-
-            Intent i = new Intent(this, ActivityGameBoard.class);
+            // Boolean valueSound = bundle.getBoolean(KEY_SOUND);
             i.putExtra(KEY_COL, valueCol);
             i.putExtra(KEY_LANG, valueLang);
             //i.putExtra(KEY_SOUND, valueSound);
+            }
+            catch(Exception e)
+            {
+            }          
             startActivity(i);
 	}
 

@@ -32,55 +32,58 @@ public class ActivityGameBoard extends Activity {
    private final String KEY_IS_PAUSE = "isPause";
    private MediaPlayer mediaPlayer;
 
+    @Override
 	public void onCreate(Bundle savedInstanceState) {
-                View view = this.findViewById(android.R.id.content);
+               // View view = this.findViewById(android.R.id.content);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.gameboard);
-                sp = this.getApplicationContext().getSharedPreferences(SHARED_PREFERENCE, Activity.MODE_PRIVATE);
+               //sp = this.getApplicationContext().getSharedPreferences(SHARED_PREFERENCE, Activity.MODE_PRIVATE);
 
-            Intent j = getIntent();
-            Bundle bundle = j.getExtras();
-            String valueC = bundle.getString(KEY_COL);
-            String valueL = bundle.getString(KEY_LANG);
-            Boolean valueS = bundle.getBoolean(KEY_SOUND);
-
-                String[] colors = valueC.split(";");
-                int[] kolory = null;
-                try {
-                    kolory = convertStringArraytoIntArray(colors);
-                } catch (Exception ex) {
-                    Logger.getLogger(ActivityGameBoard.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                view.setBackgroundColor(Color.rgb(kolory[0],kolory[1],kolory[2]));
-
-                if(valueS) //dzwiek
+                try
                 {
-                    mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.maintheme);
-                    mediaPlayer.start(); // no need to call prepare(); create() does that for you
+                Intent j = getIntent();
+                Bundle bundle = j.getExtras();
+                String valueC = bundle.getString(KEY_COL);
+                String valueL = bundle.getString(KEY_LANG);
+                //Boolean valueS = bundle.getBoolean(KEY_SOUND);
                 }
-//                else  //bez dzwieku
-//                {
+                catch(Exception e) {
+                    Toast.makeText(getApplicationContext(), "blablA" ,Toast.LENGTH_SHORT).show();
+                }
+                
+//                String[] colors = valueC.split(";");
+//                int[] kolory = null;
+//                try {
+//                    kolory = convertStringArraytoIntArray(colors);
+//                } catch (Exception ex) {
+//                    Logger.getLogger(ActivityGameBoard.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                view.setBackgroundColor(Color.rgb(kolory[0],kolory[1],kolory[2]));
 //
+//                if(valueS) //dzwiek
+//                {
+//                    mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.maintheme);
+//                    mediaPlayer.start(); // no need to call prepare(); create() does that for you
 //                }
 	}
 	
-        @Override
-        public void onPause() {
-            super.onPause();  // Always call the superclass method first
-            Editor ed = sp.edit();
-            ed.putBoolean(KEY_IS_PAUSE, true);
-            ed.commit();
-            mediaPlayer.pause();
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();  // Always call the superclass method first
-            Editor ed = sp.edit();
-            ed.putBoolean(KEY_IS_PAUSE, false);
-            ed.commit();
-            mediaPlayer.start();
-        }
+//        @Override
+//        public void onPause() {
+//            super.onPause();  // Always call the superclass method first
+//            Editor ed = sp.edit();
+//            ed.putBoolean(KEY_IS_PAUSE, true);
+//            ed.commit();
+//            mediaPlayer.pause();
+//        }
+//
+//        @Override
+//        public void onResume() {
+//            super.onResume();  // Always call the superclass method first
+//            Editor ed = sp.edit();
+//            ed.putBoolean(KEY_IS_PAUSE, false);
+//            ed.commit();
+//            mediaPlayer.start();
+//        }
 
         public void onClickPause(View view) {
             if (!sp.getBoolean(KEY_IS_PAUSE, false)) onPause();
