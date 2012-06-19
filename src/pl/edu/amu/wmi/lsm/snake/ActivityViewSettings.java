@@ -40,10 +40,9 @@ public class ActivityViewSettings extends ListActivity  {
                 ListView lv = getListView();
                 lv.setTextFilterEnabled(true);
                       lv.setOnItemClickListener(new OnItemClickListener() {
-        public void onItemClick(AdapterView<?> parent, View view,
-            int position, long id) {
-            int wybor = safeLongToInt(id);
-            switch (wybor) {
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            //int wybor = safeLongToInt(id);
+            switch (position) {
                 case 0: // change color
                     alertColors();
                     break;
@@ -57,13 +56,12 @@ public class ActivityViewSettings extends ListActivity  {
                     Intent i = new Intent(ActivityViewSettings.this, SnakeActivity.class);
                     //i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                    //Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_COL, " ")+" lol", Toast.LENGTH_SHORT).show();
-
                     i.putExtra(KEY_COL, mPrefs.getString(KEY_COL, "0;255;0"));
                     i.putExtra(KEY_LANG, mPrefs.getString(KEY_LANG, "ENG"));
                     i.putExtra(KEY_SOUND, mPrefs.getBoolean(KEY_SOUND, true));
                     startActivity(i);
                     break;
-            }            
+            }
           //Toast.makeText(getApplicationContext(), b.toString() ,Toast.LENGTH_SHORT).show();
         }
       });
@@ -99,10 +97,11 @@ public void alertLang()
         builder.setTitle("Pick a language");
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                Editor editor = mPrefs.edit();
                 lang = items[item].toString();
-                editor.putString(KEY_LANG, lang);
-                editor.commit();
+//                Editor editor = mPrefs.edit();
+//                editor.putString(KEY_LANG, lang);
+//                editor.commit();
+                savePreferences(KEY_LANG, lang);
                 dialog.dismiss();
                // Toast.makeText(getApplicationContext(), tmp+" lol", Toast.LENGTH_SHORT).show();
             }
@@ -178,24 +177,16 @@ public void alertSounds()
 public void alertCustom()
     {
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        TextView txtR = new TextView(this);
-        alert.setTitle("dasda");
+        alert.setTitle("Type RGB color, e.g. '255;255;255'");
                         final EditText inputR = new EditText(this);
                         alert.setView(inputR);
-                        final EditText inputG = new EditText(this);
-                        alert.setView(inputG);
-                        final EditText inputB = new EditText(this);
-                        alert.setView(inputB);
                         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                            String valueR = inputR.getText().toString().trim();
-                            String valueG = inputG.getText().toString().trim();
-                            String valueB = inputB.getText().toString().trim();
-                                Toast.makeText(getApplicationContext(), valueR,
-                                        Toast.LENGTH_SHORT).show();
+                            String value = inputR.getText().toString().trim();
+                                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+                                savePreferences(KEY_COL, value);
                    }
                     });
-
                alert.setNegativeButton("Cancel",
                    new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -203,22 +194,6 @@ public void alertCustom()
                             }
                             });
                     alert.show();
-
-//    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//    builder.setMessage("Not yet. Sorry...")
-//       .setCancelable(false)
-//       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//           public void onClick(DialogInterface dialog, int id) {
-//                dialog.cancel();
-//           }
-//       })
-//       .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//           public void onClick(DialogInterface dialog, int id) {
-//                dialog.cancel();
-//           }
-//       });
-//    AlertDialog alert = builder.create();
-//    alert.show();
 }
 
 private void savePreferences(String key, String value) {
@@ -229,11 +204,11 @@ private void savePreferences(String key, String value) {
     editor.commit();
 }
 
-public static int safeLongToInt(long l) {
-    if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {
-        throw new IllegalArgumentException
-            (l + " cannot be cast to int without changing its value.");
-    }
-    return (int) l;
-}
+//public static int safeLongToInt(long l) {
+//    if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {
+//        throw new IllegalArgumentException
+//            (l + " cannot be cast to int without changing its value.");
+//    }
+//    return (int) l;
+//}
 }

@@ -29,7 +29,7 @@ public class SnakeActivity extends Activity {
             Intent i = new Intent(this, ActivityGameBoard.class);
             i.putExtra(KEY_COL, valueCol);
             i.putExtra(KEY_LANG, valueLang);
-           // i.putExtra(KEY_SOUND, valueSound);
+            //i.putExtra(KEY_SOUND, valueSound);
             startActivity(i);
 	}
 
@@ -49,7 +49,7 @@ public class SnakeActivity extends Activity {
 
 	public void onClick4(View view) {
 
-		Intent i = getIntent();
+		Intent i = new Intent();
 		i.setClass(view.getContext(), ActivityViewSettings.class);
 		startActivity(i);
 	}
