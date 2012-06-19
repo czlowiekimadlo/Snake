@@ -13,7 +13,6 @@ public class SnakeActivity extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-	
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		ImageView image = (ImageView) findViewById(R.id.main_image);
@@ -28,7 +27,7 @@ public class SnakeActivity extends Activity {
             Bundle bundle = j.getExtras();
             String valueCol = bundle.getString(KEY_COL);
             String valueLang = bundle.getString(KEY_LANG);
-            // Boolean valueSound = bundle.getBoolean(KEY_SOUND);
+           // Boolean valueSound = bundle.getBoolean(KEY_SOUND);
             i.putExtra(KEY_COL, valueCol);
             i.putExtra(KEY_LANG, valueLang);
             //i.putExtra(KEY_SOUND, valueSound);
@@ -42,7 +41,7 @@ public class SnakeActivity extends Activity {
 	public void onClick2(View view) {
 
 		Intent i = getIntent();
-		i.setClass(view.getContext(), ActivityContinueGame.class);
+		i.setClass(view.getContext(), ActivityGameBoard.class);
 		startActivity(i);
 	}
 
@@ -61,7 +60,6 @@ public class SnakeActivity extends Activity {
 	}
 
 	public void onClick5(View view) {
-
 		Intent intent = new Intent(Intent.ACTION_MAIN);
 		intent.addCategory(Intent.CATEGORY_HOME);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

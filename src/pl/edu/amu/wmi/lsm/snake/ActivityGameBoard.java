@@ -19,17 +19,22 @@ import android.widget.Toast;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import pl.edu.amu.wmi.lsm.snake.R;
+import pl.edu.amu.wmi.lsm.snake.SnakeView;
+
 /**
  *
  * @author AnitkA
  */
 public class ActivityGameBoard extends Activity {
    private SharedPreferences sp;
+   private SnakeView mSnakeView;
    private final String SHARED_PREFERENCE = "Settings";
    private final String KEY_LANG = "lang";
    private final String KEY_COL = "color";
    private final String KEY_SOUND = "sound";
    private final String KEY_IS_PAUSE = "isPause";
+   private static String ICICLE_KEY = "snake-view";
    private MediaPlayer mediaPlayer;
 
     @Override
@@ -39,13 +44,28 @@ public class ActivityGameBoard extends Activity {
 		setContentView(R.layout.gameboard);
                //sp = this.getApplicationContext().getSharedPreferences(SHARED_PREFERENCE, Activity.MODE_PRIVATE);
 
-                try
+                try 
                 {
                 Intent j = getIntent();
                 Bundle bundle = j.getExtras();
                 String valueC = bundle.getString(KEY_COL);
                 String valueL = bundle.getString(KEY_LANG);
                 //Boolean valueS = bundle.getBoolean(KEY_SOUND);
+                
+                mSnakeView = (SnakeView) findViewById(R.id.snake);
+                if (savedInstanceState == null) {
+                    // We were just launched -- set up a new game
+                    mSnakeView.setMode(SnakeView.READY);
+                } else {
+                    // We are being restored
+                    Bundle map = savedInstanceState.getBundle(ICICLE_KEY);
+                    if (map != null) {
+                        mSnakeView.restoreState(map);
+                    } else {
+                        mSnakeView.setMode(SnakeView.PAUSE);
+                    }
+                }
+                
                 }
                 catch(Exception e) {
                     Toast.makeText(getApplicationContext(), "blablA" ,Toast.LENGTH_SHORT).show();
@@ -85,10 +105,10 @@ public class ActivityGameBoard extends Activity {
 //            mediaPlayer.start();
 //        }
 
-        public void onClickPause(View view) {
-            if (!sp.getBoolean(KEY_IS_PAUSE, false)) onPause();
-            else onResume();
-	}
+    public void onClickPause(View view) {
+        if (!sp.getBoolean(KEY_IS_PAUSE, false)) onPause();
+        else onResume();
+    }
 
 	public void onClickExit(View view) { //exit
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -119,7 +139,7 @@ public class ActivityGameBoard extends Activity {
 
 	}
 
-        private void alertExit() {
+    private void alertExit() {
 
         }
 
@@ -129,14 +149,14 @@ public class ActivityGameBoard extends Activity {
             return loadedString;
         }
 
-public int[] convertStringArraytoIntArray(String[] sarray) throws Exception {
-    if (sarray != null) {
-    int intarray[] = new int[sarray.length];
-    for (int i = 0; i < sarray.length; i++) {
-    intarray[i] = Integer.parseInt(sarray[i]);
-    }
-    return intarray;
-    }
-    return null;
+    public int[] convertStringArraytoIntArray(String[] sarray) throws Exception {
+    	if (sarray != null) {
+    			int intarray[] = new int[sarray.length];
+    			for (int i = 0; i < sarray.length; i++) {
+    				intarray[i] = Integer.parseInt(sarray[i]);
+    			}
+    			return intarray;
+    	}
+    	return null;
     }
 }

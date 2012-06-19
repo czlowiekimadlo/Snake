@@ -5,6 +5,14 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	xmlns:android="http://schemas.android.com/apk/res/android">
+	<pl.edu.amu.wmi.lsm.snake.SnakeView
+	 android:id="@+id/snake"
+		android:layout_width="match_parent"
+                android:layout_height="500px"
+                tileSize="24"
+                android:layout_x="0dp"
+                android:layout_y="70px"
+                />
 <Button
 	android:id="@+id/onPause"
         android:onClick="onClickPause"
