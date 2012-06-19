@@ -36,10 +36,9 @@
             android:name=".ActivityViewHighScores"
             android:label="@string/app_name" >
         </activity>
-         <activity
-            android:name=".ActivityViewSettings"
-            android:launchMode="singleTask"
-            android:label="@string/app_name" >
+        <activity 
+			android:name=".GameSettings" 
+			android:label="@string/app_name">
         </activity>
         <activity
             android:name=".ActivityGameBoard"
