@@ -198,7 +198,7 @@ public class UberSnakeView extends TileView {
     		this.nextDirection = LEFT;
     	}
     	else {
-    		this.nextDirection = DOWN;
+    		this.nextDirection = UP;
     	}
     }
     
@@ -211,7 +211,7 @@ public class UberSnakeView extends TileView {
     		this.nextDirection = RIGHT;
     	}
     	else {
-    		this.nextDirection = UP;
+    		this.nextDirection = DOWN;
     	}
     }
     
