@@ -6,8 +6,14 @@
     <string-array name="settings_array">
         <item>Change color theme</item>
         <item>Change language</item>
-        <item>Sounds</item>
+        <item>Music</item>
         <item>Back</item>
+    </string-array>
+    <string-array name="settings_array_pl">
+        <item>Zmień kolor tła</item>
+        <item>Zmień język</item>
+        <item>Muzyka</item>
+        <item>Wróć</item>
     </string-array>
     <color name="green">#008000</color>
     <string name="sett">Game Settings</string>

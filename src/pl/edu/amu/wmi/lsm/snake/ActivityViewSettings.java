@@ -54,12 +54,12 @@ public class ActivityViewSettings extends ListActivity  {
                     break;
                 case 3: // powrot do glownego
                     Intent i = new Intent(ActivityViewSettings.this, SnakeActivity.class);
-                    //i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                   //Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_COL, " ")+" lol", Toast.LENGTH_SHORT).show();
-                    i.putExtra(KEY_COL, mPrefs.getString(KEY_COL, "0;255;0"));
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    i.putExtra(KEY_COL, mPrefs.getString(KEY_COL, null));
                     i.putExtra(KEY_LANG, mPrefs.getString(KEY_LANG, "ENG"));
                     i.putExtra(KEY_SOUND, mPrefs.getString(KEY_SOUND, "on"));
                     startActivity(i);
+                    ActivityViewSettings.this.finish();
                     break;
             }
           //Toast.makeText(getApplicationContext(), b.toString() ,Toast.LENGTH_SHORT).show();
@@ -151,7 +151,7 @@ public void alertColors()
 public void alertSounds()
     {
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setMessage("Sounds:")
+    builder.setMessage("Music:")
            .setCancelable(false)
            .setPositiveButton("On", new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
