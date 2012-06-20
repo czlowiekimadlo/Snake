@@ -20,22 +20,26 @@ import android.widget.Toast;
 
 public class ActivityViewHighScores extends Activity {
 
-    private SharedPreferences sp;
-    private String lang;
-    private final String KEY_LANG = "lang";
+	private SharedPreferences sp;
+	private String lang;
+	private final String KEY_LANG = "lang";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-                try{ lang = loadPreferences(KEY_LANG); } catch(Exception e) { lang = "EN"; }
-                if(lang.equals("PL")) setContentView(R.layout.highscorespl);
-                else setContentView(R.layout.highscores);
+		try {
+			lang = loadPreferences(KEY_LANG);
+		} catch (Exception e) {
+			lang = "EN";
+		}
+		if (lang.equals("PL"))
+			setContentView(R.layout.highscorespl);
+		else
+			setContentView(R.layout.highscores);
 
 		DataBaseHelper db = new DataBaseHelper(this);
-		
-	//	db.addScore(new Score(1000));
-	//	db.addScore(new Score(2000));
-	//	db.addScore(new Score(3000));
+
+		// db.addScore(new Score(10));
 
 		List<Score> list = db.get3BestScores();
 		db.close();
@@ -53,9 +57,10 @@ public class ActivityViewHighScores extends Activity {
 				android.R.layout.simple_list_item_1, listScores);
 
 		myList.setAdapter(adapter);
-		
+
 		if (i == 0) {
-			Toast.makeText(getApplicationContext(), "The Database is empty", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "The Database is empty",
+					Toast.LENGTH_SHORT).show();
 		}
 
 	}
@@ -74,9 +79,9 @@ public class ActivityViewHighScores extends Activity {
 		startActivity(i);
 	}
 
-       private String loadPreferences(String key) {
-            sp  = PreferenceManager.getDefaultSharedPreferences(this);
-            String loadedString = sp.getString(key, "");
-            return loadedString;
-        }
+	private String loadPreferences(String key) {
+		sp = PreferenceManager.getDefaultSharedPreferences(this);
+		String loadedString = sp.getString(key, "");
+		return loadedString;
+	}
 }

@@ -38,7 +38,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 
 		db.execSQL("DROP TABLE IF EXISTS " + highScoresTable);
-		// db.execSQL("DROP VIEW IF EXISTS " + viewEmps);
 		onCreate(db);
 	}
 
@@ -59,24 +58,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	}
 
 	public List<Score> get3BestScores() {
-		List<Score> scoreList = new ArrayList<Score>(); //colID + "," + colName + "," +
-		String selectQuery = "SELECT " +   colScore
-				+ " FROM " + highScoresTable + " ORDER BY " + colScore
-				+ " DESC LIMIT 3";
+		List<Score> scoreList = new ArrayList<Score>(); 
+														
+		String selectQuery = "SELECT " + colScore + " FROM " + highScoresTable
+				+ " ORDER BY " + colScore + " DESC LIMIT 3";
 
-		SQLiteDatabase db = this.getReadableDatabase(); 
+		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
 		if (cursor.moveToFirst()) {
 			do {
 				Score score = new Score();
-			//	score.setID(Integer.parseInt(cursor.getString(0)));
-			//	score.setName(cursor.getString(0));
 				score.setScore(Integer.parseInt(cursor.getString(0)));
 				scoreList.add(score);
 			} while (cursor.moveToNext());
 		}
 
+		cursor.close();
 		return scoreList;
 
 	}
@@ -86,7 +84,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		List<Score> scoreList = new ArrayList<Score>();
 		String selectQuery = "SELECT  * FROM " + highScoresTable;
 
-		SQLiteDatabase db = this.getReadableDatabase(); 
+		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
 		if (cursor.moveToFirst()) {
@@ -98,7 +96,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 				scoreList.add(score);
 			} while (cursor.moveToNext());
 		}
-
+		cursor.close();
 		return scoreList;
 	}
 }
