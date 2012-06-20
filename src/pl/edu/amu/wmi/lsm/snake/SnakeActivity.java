@@ -28,11 +28,11 @@ public class SnakeActivity extends Activity {
             Bundle bundle = j.getExtras();
             String valueCol = bundle.getString(KEY_COL);
             String valueLang = bundle.getString(KEY_LANG);
-           // Boolean valueSound = bundle.getBoolean(KEY_SOUND);
+            String valueSound = bundle.getString(KEY_SOUND);
             i.putExtra(KEY_COL, valueCol);
             i.putExtra(KEY_LANG, valueLang);
             i.putExtra(KEY_RESTART, true);
-            //i.putExtra(KEY_SOUND, valueSound);
+            i.putExtra(KEY_SOUND, valueSound);
             }
             catch(Exception e)
             {
