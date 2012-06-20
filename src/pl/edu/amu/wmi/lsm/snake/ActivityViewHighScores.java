@@ -6,8 +6,10 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,9 +20,16 @@ import android.widget.Toast;
 
 public class ActivityViewHighScores extends Activity {
 
+    private SharedPreferences sp;
+    private String lang;
+    private final String KEY_LANG = "lang";
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.highscores);
+
+                try{ lang = loadPreferences(KEY_LANG); } catch(Exception e) { lang = "EN"; }
+                if(lang.equals("PL")) setContentView(R.layout.highscorespl);
+                else setContentView(R.layout.highscores);
 
 		DataBaseHelper db = new DataBaseHelper(this);
 		
@@ -61,4 +70,10 @@ public class ActivityViewHighScores extends Activity {
 		Intent i = new Intent(this, ActivityViewHighScores.class);
 		startActivity(i);
 	}
+
+       private String loadPreferences(String key) {
+            sp  = PreferenceManager.getDefaultSharedPreferences(this);
+            String loadedString = sp.getString(key, "");
+            return loadedString;
+        }
 }

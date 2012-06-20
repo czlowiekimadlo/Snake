@@ -29,7 +29,7 @@ public class ActivityViewSettings extends ListActivity  {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.settings);
-                mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+                //mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
                 try {
                 lang = loadPreferences(KEY_LANG);
                 } catch(Exception e) { lang = "EN"; }
@@ -206,6 +206,7 @@ public void alertCustom()
 
 private void savePreferences(String key, String value) {
     //mPrefs = getPreferences(MODE_PRIVATE);
+    mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putString(key, value);
     editor.commit();
@@ -213,6 +214,7 @@ private void savePreferences(String key, String value) {
 
         private String loadPreferences(String key) {
             //Prefs = getPreferences(MODE_PRIVATE);
+            mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
             String loadedString = mPrefs.getString(key, "");
             return loadedString;
         }
