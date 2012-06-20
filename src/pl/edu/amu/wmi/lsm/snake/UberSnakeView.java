@@ -10,11 +10,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
-import java.text.BreakIterator;
+import android.widget.TextView;
+
 
 public class UberSnakeView extends TileView {
 	
-	public static int mode = 1; //zmienilam
+	public int mode = READY; //zmienilam
     public static final int PAUSE = 0;
     public static final int READY = 1;
     public static final int RUNNING = 2;
@@ -31,12 +32,14 @@ public class UberSnakeView extends TileView {
     private static final int YELLOW_STAR = 2;
     private static final int GREEN_STAR = 3;
     
-    private long score = 0;
+    private int score = 0;
     private long speed = 600;
     private long lastStep;
     
     private Field omNomNom;
     private SnakeBody ssssnake;
+    public TextView scoreNumber;
+    public TextView statusText;
     
     
     private static final Random RNG = new Random();
@@ -92,6 +95,9 @@ public class UberSnakeView extends TileView {
     	this.score = 0;
     	this.speed = 600;
     	this.nextDirection = RIGHT;
+    	if (this.scoreNumber != null) {
+    		this.scoreNumber.setText("0");
+    	}
     }
     
     public void update() {
@@ -150,14 +156,18 @@ public class UberSnakeView extends TileView {
         }
     	//tu bym walnela game over
     	if (this.omNomNom.equals(next)) {
-    		this.rollDot();
-    		this.ssssnake.move(next, true);
-    		if (this.speed > 200) this.speed -= 10;
-    		this.updateScore();
+    		this.omNomNom(next);
     	}
     	else {
     		this.ssssnake.move(next, false);
     	}
+    }
+    
+    private void omNomNom(Field next) {
+    	this.rollDot();
+		this.ssssnake.move(next, true);
+		if (this.speed > 200) this.speed -= 10;
+		this.updateScore();
     }
     
     private void rollDot() {
@@ -190,7 +200,24 @@ public class UberSnakeView extends TileView {
 
         if (newMode == RUNNING & oldMode != RUNNING) {
             update();
-            return;
+        }
+        
+        switch (newMode) {
+        case PAUSE: {
+        	this.statusText.setText("Paused");
+        	break;
+        }
+        case LOSE: {
+        	this.statusText.setText("GAME OVER");
+        	break;
+        }
+        case RUNNING: {
+        	this.statusText.setText(" ");
+        	break;
+        }
+        default: {
+        	this.statusText.setText(" ");
+        }
         }
     }
     
@@ -206,12 +233,23 @@ public class UberSnakeView extends TileView {
     	if (mode != RUNNING) {
     		return;
     	}
-    	
-    	if (this.nextDirection == UP || this.nextDirection == DOWN) {
+    	switch (this.direction) {
+    	case UP: {
     		this.nextDirection = LEFT;
+    		break;
     	}
-    	else {
+    	case DOWN: {
+    		this.nextDirection = RIGHT;
+    		break;
+    	}
+    	case LEFT: {
+    		this.nextDirection = DOWN;
+    		break;
+    	}
+    	case RIGHT: {
     		this.nextDirection = UP;
+    		break;
+    	}
     	}
     }
     
@@ -219,16 +257,28 @@ public class UberSnakeView extends TileView {
     	if (mode != RUNNING) {
     		return;
     	}
-    	
-    	if (this.nextDirection == UP || this.nextDirection == DOWN) {
+    	switch (this.direction) {
+    	case UP: {
     		this.nextDirection = RIGHT;
+    		break;
     	}
-    	else {
+    	case DOWN: {
+    		this.nextDirection = LEFT;
+    		break;
+    	}
+    	case LEFT: {
+    		this.nextDirection = UP;
+    		break;
+    	}
+    	case RIGHT: {
     		this.nextDirection = DOWN;
+    		break;
+    	}
     	}
     }
     
     private void updateScore() {
     	this.score++;
+    	this.scoreNumber.setText(Integer.toString(this.score));
     }
 }
