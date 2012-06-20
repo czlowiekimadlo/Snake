@@ -48,26 +48,37 @@ public class ActivityGameBoard extends Activity {
 		Log.v("INFO", "game board create");
                 try 
                 {
-                Intent j = getIntent();
-                Bundle bundle = j.getExtras();
-                String valueC = bundle.getString(KEY_COL);               
-                Boolean valueR = bundle.getBoolean(KEY_RESTART);
-
-                String[] colors = valueC.split(";");
-                int[] kolory = null;
-                try {
-                    kolory = convertStringArraytoIntArray(colors);
-                } catch (Exception ex) {
-                    Logger.getLogger(ActivityGameBoard.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                view.setBackgroundColor(Color.rgb(kolory[0],kolory[1],kolory[2]));
-                if (valueR) {
-                	this.snakeView.resetGame();
-                }
-                }
-                catch(Exception e) {
+                    Intent j = getIntent();
+                    Bundle bundle = j.getExtras();
+                    String valueC = bundle.getString(KEY_COL);
+                    Boolean valueR = bundle.getBoolean(KEY_RESTART);
+                    String[] colors = valueC.split(";");
+                    int[] kolory = null;
+                    try {
+                        kolory = convertStringArraytoIntArray(colors);
+                    } catch (Exception ex) {
+                        Logger.getLogger(ActivityGameBoard.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    view.setBackgroundColor(Color.rgb(kolory[0],kolory[1],kolory[2]));
+                    if (valueR) {
+                            this.snakeView.resetGame();
+                    }
+                } catch(Exception e) {
                     //view.setBackgroundColor(Color.rgb(0,255,0));
                     Log.v("ERROR", e.toString());
+                    try {
+                        String valueC = loadPreferences(KEY_COL);
+                        String[] colors = valueC.split(";");
+                        int[] kolory = null;
+                        try {
+                            kolory = convertStringArraytoIntArray(colors);
+                        } catch (Exception ex) {
+                            Logger.getLogger(ActivityGameBoard.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        view.setBackgroundColor(Color.rgb(kolory[0],kolory[1],kolory[2]));
+                    } catch(Exception f) {
+                        Logger.getLogger(ActivityGameBoard.class.getName()).log(Level.SEVERE, null, f);
+                    }
                 }
 
                 try {
@@ -84,9 +95,12 @@ public class ActivityGameBoard extends Activity {
                     if(valueS.equals("1")) //dzwiek
                     {
                         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.maintheme);
+                        mediaPlayer.setVolume(0.5f, 05.f);
+                        mediaPlayer.setLooping(true);
                         mediaPlayer.start(); // no need to call prepare(); create() does that for you
                     }
                 } catch(Exception e) {
+                        //savePreferences(KEY_SOUND, "1");
                         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.maintheme);
                         mediaPlayer.start(); // no need to call prepare(); create() does that for you
                 }
@@ -166,10 +180,17 @@ public class ActivityGameBoard extends Activity {
         }
 
         private String loadPreferences(String key) {
-            //SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+            sp = getPreferences(MODE_PRIVATE);
             String loadedString = sp.getString(key, "");
             return loadedString;
         }
+
+    private void savePreferences(String key, String value) {
+    sp = getPreferences(MODE_PRIVATE);
+    SharedPreferences.Editor editor = sp.edit();
+    editor.putString(key, value);
+    editor.commit();
+}
 
     public int[] convertStringArraytoIntArray(String[] sarray) throws Exception {
     	if (sarray != null) {

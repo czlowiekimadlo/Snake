@@ -3,11 +3,14 @@ package pl.edu.amu.wmi.lsm.snake;
 import java.util.Random;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
+import java.text.BreakIterator;
 
 public class UberSnakeView extends TileView {
 	
@@ -38,6 +41,10 @@ public class UberSnakeView extends TileView {
     private static final Random RNG = new Random();
     
     private RefreshHandler redrawHandler = new RefreshHandler();
+    private MediaPlayer mediaPlayer;
+    private SharedPreferences sp;
+    private final String KEY_SOUND = "sound";
+
 
     class RefreshHandler extends Handler {
 
@@ -134,6 +141,9 @@ public class UberSnakeView extends TileView {
     	if ((next.x < 0) || (next.y < 0) || (next.x > mXTileCount - 1)
                 || (next.y > mYTileCount - 1) || this.ssssnake.collision(next)) {
             setMode(LOSE);
+            mediaPlayer = MediaPlayer.create(this.getContext(), R.raw.snake_lost);
+            mediaPlayer.setVolume(1.0f, 1.0f);
+            mediaPlayer.start();
             Log.v("INFO", "lost");
             return;
         }
@@ -151,6 +161,8 @@ public class UberSnakeView extends TileView {
     
     private void rollDot() {
         boolean found = false;
+        mediaPlayer = MediaPlayer.create(this.getContext(), R.raw.snake_eats);
+        mediaPlayer.start();
         while (!found) {
             int newX = 1 + RNG.nextInt(mXTileCount - 2);
             int newY = 1 + RNG.nextInt(mYTileCount - 2);
@@ -218,5 +230,4 @@ public class UberSnakeView extends TileView {
     private void updateScore() {
     	this.score++;
     }
-
 }
