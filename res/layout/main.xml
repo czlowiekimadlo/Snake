@@ -3,15 +3,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" android:background="#FEFEFE">
-
+
     <ImageView
         android:id="@+id/main_image"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/snake" />
+
     <Button
         android:id="@+id/newGame"
         android:layout_width="match_parent"
@@ -19,12 +20,6 @@
         android:onClick="onClick"
         android:text="Play New Game" />
 
-    <Button
-        android:id="@+id/cont"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClick2"
-        android:text="Continue Game" />
 
     <Button
         android:id="@+id/highScores"

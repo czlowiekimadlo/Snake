@@ -52,14 +52,6 @@ public class SnakeActivity extends Activity {
             startActivity(i);
 	}
 
-	public void onClick2(View view) {
-
-		Intent i = getIntent();
-		i.setClass(view.getContext(), ActivityGameBoard.class);
-		i.putExtra(KEY_RESTART, false);
-		startActivity(i);
-	}
-
 	public void onClick3(View view) {
 
 		Intent i = getIntent();
