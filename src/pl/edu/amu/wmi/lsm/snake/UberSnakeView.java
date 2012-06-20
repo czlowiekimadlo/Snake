@@ -148,7 +148,7 @@ public class UberSnakeView extends TileView {
             Log.v("INFO", "lost");
             return;
         }
-    	
+    	//tu bym walnela game over
     	if (this.omNomNom.equals(next)) {
     		this.rollDot();
     		this.ssssnake.move(next, true);
