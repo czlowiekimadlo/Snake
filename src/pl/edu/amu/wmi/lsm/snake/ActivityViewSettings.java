@@ -5,7 +5,6 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -15,8 +14,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class ActivityViewSettings extends ListActivity  {
    private SharedPreferences mPrefs;
@@ -32,7 +29,6 @@ public class ActivityViewSettings extends ListActivity  {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.settings);
-
                 mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
                 try {
                 lang = loadPreferences(KEY_LANG);
@@ -62,8 +58,8 @@ public class ActivityViewSettings extends ListActivity  {
                     Intent i = new Intent(ActivityViewSettings.this, SnakeActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     i.putExtra(KEY_COL, mPrefs.getString(KEY_COL, null));
-                    i.putExtra(KEY_LANG, mPrefs.getString(KEY_LANG, "ENG"));
-                    i.putExtra(KEY_SOUND, mPrefs.getString(KEY_SOUND, "on"));
+                    i.putExtra(KEY_LANG, mPrefs.getString(KEY_LANG, "EN"));
+                    i.putExtra(KEY_SOUND, mPrefs.getString(KEY_SOUND, "1"));
                     startActivity(i);
                     ActivityViewSettings.this.finish();
                     break;
@@ -124,9 +120,12 @@ public void alertColors()
 //visible on screen are changed.
     {
         CharSequence[] items = {"Custom", "Red", "Green", "Blue"};
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
         if(lang.equals("PL")) builder.setTitle("Wybierz kolor");
         else builder.setTitle("Pick a color");
+
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
 
@@ -158,7 +157,7 @@ public void alertColors()
 public void alertSounds()
     {
     String przycisk = null;
-    String on, off;
+    String on = null, off = null;
     if(lang.equals("PL")) { przycisk = "Muzyka:"; on = "Wł."; off = "Wył."; }
     else { przycisk = "Music:"; on = "on"; off = "off"; }
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -206,14 +205,14 @@ public void alertCustom()
 }
 
 private void savePreferences(String key, String value) {
-    mPrefs = getPreferences(MODE_PRIVATE);
+    //mPrefs = getPreferences(MODE_PRIVATE);
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putString(key, value);
     editor.commit();
 }
 
         private String loadPreferences(String key) {
-            mPrefs = getPreferences(MODE_PRIVATE);
+            //Prefs = getPreferences(MODE_PRIVATE);
             String loadedString = mPrefs.getString(key, "");
             return loadedString;
         }

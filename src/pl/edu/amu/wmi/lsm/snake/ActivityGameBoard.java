@@ -14,6 +14,7 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -38,15 +39,17 @@ public class ActivityGameBoard extends Activity {
 	private final String KEY_IS_PAUSE = "isPause";
 	private static String ICICLE_KEY = "snake-view";
 	private MediaPlayer mediaPlayer;
+        private String lang;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		View view = this.findViewById(android.R.id.content);
 		super.onCreate(savedInstanceState);
+                sp  = PreferenceManager.getDefaultSharedPreferences(this);
 		setContentView(R.layout.gameboard);
-		// sp =
-		// this.getApplicationContext().getSharedPreferences(SHARED_PREFERENCE,
-		// Activity.MODE_PRIVATE);
+
+                try { lang = loadPreferences(KEY_LANG); } catch(Exception e) {lang = "EN"; }
+
 		Log.v("INFO", "game board create");
 		try {
 			Intent j = getIntent();
@@ -160,10 +163,14 @@ public class ActivityGameBoard extends Activity {
 	}
 
 	public void onClickExit(View view) { // exit
+            String msg = null, yes = null, no = null;
+            if(lang.equals("PL")) { msg = "Chcesz zakończyć grę?"; yes = "Tak"; no = "Nie"; }
+            else { msg = "Are you sure you want to exit?"; yes = "Yes"; no = "No"; }
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Are you sure you want to exit?")
+		builder.setMessage(msg)
 				.setCancelable(false)
-				.setPositiveButton("Yes",
+				.setPositiveButton(yes,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								try {
@@ -179,7 +186,7 @@ public class ActivityGameBoard extends Activity {
 
 							}
 						})
-				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+				.setNegativeButton(no, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
@@ -201,13 +208,13 @@ public class ActivityGameBoard extends Activity {
 	}
 
 	private String loadPreferences(String key) {
-		sp = getPreferences(MODE_PRIVATE);
+		//sp = getPreferences(MODE_PRIVATE);
 		String loadedString = sp.getString(key, "");
 		return loadedString;
 	}
 
 	private void savePreferences(String key, String value) {
-		sp = getPreferences(MODE_PRIVATE);
+		//sp = getPreferences(MODE_PRIVATE);
 		SharedPreferences.Editor editor = sp.edit();
 		editor.putString(key, value);
 		editor.commit();
