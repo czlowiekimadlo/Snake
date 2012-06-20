@@ -34,7 +34,13 @@ public class ActivityViewSettings extends ListActivity  {
 		//setContentView(R.layout.settings);
 
                 mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-                String[] settings = getResources().getStringArray(R.array.settings_array);
+                try {
+                lang = loadPreferences(KEY_LANG);
+                } catch(Exception e) { lang = "EN"; }
+
+                String[] settings = null;
+                if(lang.equals("PL")) { settings = getResources().getStringArray(R.array.settings_array_pl); }
+                else settings = getResources().getStringArray(R.array.settings_array);
                 setListAdapter(new ArrayAdapter<String>(this, R.layout.settings, settings));
                 
                 ListView lv = getListView();
@@ -94,7 +100,8 @@ public void alertLang()
         final CharSequence[] items = {"PL", "EN"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Pick a language");
+        if(lang.equals("PL")) builder.setTitle("Wybierz język");
+        else builder.setTitle("Pick a language");
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 lang = items[item].toString();
@@ -116,10 +123,10 @@ public void alertColors()
 //custom theme by entering 3 numbers (between 0 and 255 inclusive) . Colors of elements
 //visible on screen are changed.
     {
-        final CharSequence[] items = {"Custom", "Red", "Green", "Blue"};
-
+        CharSequence[] items = {"Custom", "Red", "Green", "Blue"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Pick a color");
+        if(lang.equals("PL")) builder.setTitle("Wybierz kolor");
+        else builder.setTitle("Pick a color");
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
 
@@ -150,15 +157,19 @@ public void alertColors()
 
 public void alertSounds()
     {
+    String przycisk = null;
+    String on, off;
+    if(lang.equals("PL")) { przycisk = "Muzyka:"; on = "Wł."; off = "Wył."; }
+    else { przycisk = "Music:"; on = "on"; off = "off"; }
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setMessage("Music:")
+    builder.setMessage(przycisk)
            .setCancelable(false)
-           .setPositiveButton("On", new DialogInterface.OnClickListener() {
+           .setPositiveButton(on, new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
                    savePreferences(KEY_SOUND, "1");
                }
            })
-           .setNegativeButton("Off", new DialogInterface.OnClickListener() {
+           .setNegativeButton(off, new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
                    savePreferences(KEY_SOUND, "off");
                }
@@ -169,8 +180,13 @@ public void alertSounds()
 
 public void alertCustom()
     {
+        String cancel = null;
+        if(lang.equals("PL")) cancel = "Anuluj";
+        else cancel = "Cancel";
+
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Type RGB color, e.g. '255;255;255'");
+        if(lang.equals("PL")) alert.setTitle("Wpisz kolor RGB, np. '255;255;255'");
+        else alert.setTitle("Type RGB color, e.g. '255;255;255'");
                         final EditText inputR = new EditText(this);
                         alert.setView(inputR);
                         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -180,7 +196,7 @@ public void alertCustom()
                                 savePreferences(KEY_COL, value);
                    }
                     });
-               alert.setNegativeButton("Cancel",
+               alert.setNegativeButton(cancel,
                    new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
                                     dialog.cancel();
@@ -190,18 +206,16 @@ public void alertCustom()
 }
 
 private void savePreferences(String key, String value) {
-    //SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-   // SharedPreferences.Editor editor = sharedPreferences.edit();
+    mPrefs = getPreferences(MODE_PRIVATE);
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putString(key, value);
     editor.commit();
 }
 
-//public static int safeLongToInt(long l) {
-//    if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {
-//        throw new IllegalArgumentException
-//            (l + " cannot be cast to int without changing its value.");
-//    }
-//    return (int) l;
-//}
+        private String loadPreferences(String key) {
+            mPrefs = getPreferences(MODE_PRIVATE);
+            String loadedString = mPrefs.getString(key, "");
+            return loadedString;
+        }
+
 }
