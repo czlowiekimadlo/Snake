@@ -18,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.TextView;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -118,6 +119,8 @@ public class ActivityGameBoard extends Activity {
 		}
 
 		snakeView = (UberSnakeView) findViewById(R.id.snake);
+		snakeView.scoreNumber = (TextView) findViewById(R.id.scoreNumber);
+		snakeView.statusText = (TextView) findViewById(R.id.statusText);
 		if (savedInstanceState == null) {
 			// We were just launched -- set up a new game
 			snakeView.setMode(SnakeView.READY);
@@ -151,11 +154,11 @@ public class ActivityGameBoard extends Activity {
 	// }
 	public void onClickPause(View view) { // zmienilam
 
-		if (!(UberSnakeView.mode == UberSnakeView.PAUSE)) {
-			UberSnakeView.mode = UberSnakeView.PAUSE;
+		if (snakeView.mode != UberSnakeView.PAUSE) {
+			snakeView.setMode(UberSnakeView.PAUSE);
 			mediaPlayer.pause();
 		} else {
-			UberSnakeView.mode = UberSnakeView.RUNNING;
+			snakeView.setMode(UberSnakeView.RUNNING);
 			mediaPlayer.start();
 		}
 		snakeView.update();
@@ -166,7 +169,7 @@ public class ActivityGameBoard extends Activity {
             String msg = null, yes = null, no = null;
             if(lang.equals("PL")) { msg = "Chcesz zakończyć grę?"; yes = "Tak"; no = "Nie"; }
             else { msg = "Are you sure you want to exit?"; yes = "Yes"; no = "No"; }
-
+            snakeView.setMode(UberSnakeView.PAUSE);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(msg)
 				.setCancelable(false)

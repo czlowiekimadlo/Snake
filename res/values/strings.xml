@@ -17,4 +17,5 @@
     </string-array>
     <color name="green">#008000</color>
     <string name="sett">Game Settings</string>
+    <string name="score">Score</string>
 </resources>
