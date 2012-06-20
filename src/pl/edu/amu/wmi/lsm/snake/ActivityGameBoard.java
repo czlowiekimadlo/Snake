@@ -81,14 +81,12 @@ public class ActivityGameBoard extends Activity {
                     Intent j = getIntent();
                     Bundle bundle = j.getExtras();
                     String valueS = bundle.getString(KEY_SOUND);
-                    Toast.makeText(getApplicationContext(), valueS, Toast.LENGTH_SHORT).show();
-                    if(!(valueS=="off")) //dzwiek
+                    if(valueS.equals("1")) //dzwiek
                     {
                         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.maintheme);
                         mediaPlayer.start(); // no need to call prepare(); create() does that for you
                     }
                 } catch(Exception e) {
-                    Toast.makeText(getApplicationContext(), "lololo", Toast.LENGTH_SHORT).show();
                         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.maintheme);
                         mediaPlayer.start(); // no need to call prepare(); create() does that for you
                 }
@@ -168,8 +166,8 @@ public class ActivityGameBoard extends Activity {
         }
 
         private String loadPreferences(String key) {
-            SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-            String loadedString = sharedPreferences.getString(key, "");
+            //SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+            String loadedString = sp.getString(key, "");
             return loadedString;
         }
 

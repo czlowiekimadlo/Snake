@@ -155,20 +155,12 @@ public void alertSounds()
            .setCancelable(false)
            .setPositiveButton("On", new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
-                   savePreferences(KEY_SOUND, "on");
-                   Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_SOUND, "trolo"), Toast.LENGTH_SHORT).show();
-//                   Editor editor = mPrefs.edit();
-//                   editor.putBoolean(KEY_SOUND, true);
-//                   editor.commit();
+                   savePreferences(KEY_SOUND, "1");
                }
            })
            .setNegativeButton("Off", new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
                    savePreferences(KEY_SOUND, "off");
-                   Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_SOUND, "trolo"), Toast.LENGTH_SHORT).show();
-//                   Editor editor = mPrefs.edit();
-//                   editor.putBoolean(KEY_SOUND, false);
-//                   editor.commit();
                }
            });
     AlertDialog alert = builder.create();
