@@ -105,7 +105,7 @@ public class ActivityGameBoard extends Activity {
 			{
 				mediaPlayer = MediaPlayer.create(getApplicationContext(),
 						R.raw.maintheme);
-				mediaPlayer.setVolume(0.5f, 05.f);
+				mediaPlayer.setVolume(0.1f, 0.1f);
 				mediaPlayer.setLooping(true);
 				mediaPlayer.start(); // no need to call prepare(); create() does
 										// that for you
@@ -121,6 +121,7 @@ public class ActivityGameBoard extends Activity {
 		snakeView = (UberSnakeView) findViewById(R.id.snake);
 		snakeView.scoreNumber = (TextView) findViewById(R.id.scoreNumber);
 		snakeView.statusText = (TextView) findViewById(R.id.statusText);
+		snakeView.bgMusic = this.mediaPlayer;
 		if (savedInstanceState == null) {
 			// We were just launched -- set up a new game
 			snakeView.setMode(SnakeView.READY);
@@ -154,10 +155,10 @@ public class ActivityGameBoard extends Activity {
 	// }
 	public void onClickPause(View view) { // zmienilam
 
-		if (snakeView.mode != UberSnakeView.PAUSE) {
+		if (snakeView.mode == UberSnakeView.RUNNING) {
 			snakeView.setMode(UberSnakeView.PAUSE);
 			mediaPlayer.pause();
-		} else {
+		} else if (snakeView.mode == UberSnakeView.PAUSE) {
 			snakeView.setMode(UberSnakeView.RUNNING);
 			mediaPlayer.start();
 		}
@@ -169,7 +170,7 @@ public class ActivityGameBoard extends Activity {
             String msg = null, yes = null, no = null;
             if(lang.equals("PL")) { msg = "Chcesz zakończyć grę?"; yes = "Tak"; no = "Nie"; }
             else { msg = "Are you sure you want to exit?"; yes = "Yes"; no = "No"; }
-            snakeView.setMode(UberSnakeView.PAUSE);
+            if (snakeView.mode == UberSnakeView.RUNNING) snakeView.setMode(UberSnakeView.PAUSE);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(msg)
 				.setCancelable(false)
