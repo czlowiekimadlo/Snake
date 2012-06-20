@@ -11,7 +11,7 @@ import android.util.Log;
 
 public class UberSnakeView extends TileView {
 	
-	private int mode = READY;
+	public static int mode = 1; //zmienilam
     public static final int PAUSE = 0;
     public static final int READY = 1;
     public static final int RUNNING = 2;
@@ -34,6 +34,7 @@ public class UberSnakeView extends TileView {
     
     private Field omNomNom;
     private SnakeBody ssssnake;
+    
     
     private static final Random RNG = new Random();
     
