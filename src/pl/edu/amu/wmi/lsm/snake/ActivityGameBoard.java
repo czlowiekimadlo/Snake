@@ -154,8 +154,9 @@ public class ActivityGameBoard extends Activity {
                            } catch(Exception e) { }
                             Intent i = new Intent(ActivityGameBoard.this, SnakeActivity.class);
                             //i.setClass(view.getContext(), SnakeActivity.class);
-                            startActivity(i); 
                             ActivityGameBoard.this.finish();
+                            startActivity(i);
+                            
                        }
                    })
                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
