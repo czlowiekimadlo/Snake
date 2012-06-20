@@ -27,6 +27,7 @@ public class SnakeActivity extends Activity {
 
                 if(lang.equals("PL")) setContentView(R.layout.mainpl);
                 else setContentView(R.layout.main);
+    // Toast.makeText(getApplicationContext(), lang ,Toast.LENGTH_SHORT).show();
 		ImageView image = (ImageView) findViewById(R.id.main_image);
 	}
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/main_image"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/snake" />
+    <Button
+        android:id="@+id/newGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Nowa gra" />
+
+    <Button
+        android:id="@+id/cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick2"
+        android:text="Kontunuuj" />
+
+    <Button
+        android:id="@+id/highScores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick3"
+        android:text="Najlepsze wyniki" />
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick4"
+        android:text="Ustawienia" />
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick5"
+        android:text="Wyjście" />
+
+</LinearLayout>
