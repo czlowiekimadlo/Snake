@@ -13,7 +13,7 @@
 	    android:layout_height="366dp"
 	    android:layout_x="0dp"
 	    android:layout_y="42dp"
-	    tileSize="12" android:focusable="true" android:focusableInTouchMode="true" android:visibility="visible" android:nextFocusDown="@id/snake" android:nextFocusLeft="@id/snake" android:nextFocusRight="@id/snake" android:nextFocusUp="@id/snake" android:background="#000"/>
+	    tileSize="18" android:focusable="true" android:focusableInTouchMode="true" android:visibility="visible" android:nextFocusDown="@id/snake" android:nextFocusLeft="@id/snake" android:nextFocusRight="@id/snake" android:nextFocusUp="@id/snake" android:background="#000"/>
 
 <Button
 	android:id="@+id/onPause"
@@ -56,15 +56,6 @@
         android:layout_x="240dp"
 	android:layout_y="410dp"
     android:focusable="false" android:focusableInTouchMode="false"/>
-
-<TextView
-    android:id="@+id/scoreLabel"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_x="53dp"
-    android:layout_y="14dp"
-    android:text="@string/score"
-    android:textAppearance="?android:attr/textAppearanceLarge" />
 
 <TextView
     android:id="@+id/scoreNumber"

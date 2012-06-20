@@ -27,9 +27,8 @@ public class UberSnakeView extends TileView {
     private static final int RIGHT = 3;
     private static final int LEFT = 4;
     
-    private static final int RED_STAR = 1;
-    private static final int YELLOW_STAR = 2;
-    private static final int GREEN_STAR = 3;
+    private static final int SMILE = 1;
+    private static final int BALL = 2;
     
     private int score = 0;
     private long speed = 600;
@@ -79,10 +78,9 @@ public class UberSnakeView extends TileView {
 
         Resources r = this.getContext().getResources();
         Log.v("INFO", "snake view init");
-        resetTiles(4);
-        loadTile(RED_STAR, r.getDrawable(R.drawable.redstar));
-        loadTile(YELLOW_STAR, r.getDrawable(R.drawable.yellowstar));
-        loadTile(GREEN_STAR, r.getDrawable(R.drawable.greenstar));
+        resetTiles(3);
+        loadTile(SMILE, r.getDrawable(R.drawable.smile));
+        loadTile(BALL, r.getDrawable(R.drawable.ball));
         this.ssssnake = new SnakeBody();
         this.omNomNom = new Field(10,7);
         this.resetGame();
@@ -189,12 +187,12 @@ public class UberSnakeView extends TileView {
     }
     
     private void drawDot() {
-    	setTile(YELLOW_STAR, this.omNomNom.x, this.omNomNom.y);
+    	setTile(SMILE, this.omNomNom.x, this.omNomNom.y);
     }
     
     private void drawSnake() {
         for (Field c : this.ssssnake.trail) {
-            setTile(RED_STAR, c.x, c.y);
+            setTile(BALL, c.x, c.y);
         }
     }
     

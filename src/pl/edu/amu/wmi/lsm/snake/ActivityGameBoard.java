@@ -124,14 +124,14 @@ public class ActivityGameBoard extends Activity {
 		snakeView.bgMusic = this.mediaPlayer;
 		if (savedInstanceState == null) {
 			// We were just launched -- set up a new game
-			snakeView.setMode(SnakeView.READY);
+			snakeView.setMode(UberSnakeView.READY);
 		} else {
 			// We are being restored
 			Bundle map = savedInstanceState.getBundle(ICICLE_KEY);
 			if (map != null) {
 				// snakeView.restoreState(map);
 			} else {
-				snakeView.setMode(SnakeView.READY);
+				snakeView.setMode(UberSnakeView.READY);
 			}
 		}
 	}
