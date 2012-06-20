@@ -26,7 +26,7 @@ public class ActivityViewSettings extends ListActivity  {
    private final String KEY_COL = "color";
    public String color;
    private final String KEY_SOUND = "sound";
-   public boolean sound;
+   public String sound;
 
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class ActivityViewSettings extends ListActivity  {
                    //Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_COL, " ")+" lol", Toast.LENGTH_SHORT).show();
                     i.putExtra(KEY_COL, mPrefs.getString(KEY_COL, "0;255;0"));
                     i.putExtra(KEY_LANG, mPrefs.getString(KEY_LANG, "ENG"));
-                    i.putExtra(KEY_SOUND, mPrefs.getBoolean(KEY_SOUND, true));
+                    i.putExtra(KEY_SOUND, mPrefs.getString(KEY_SOUND, "on"));
                     startActivity(i);
                     break;
             }
@@ -72,7 +72,7 @@ public class ActivityViewSettings extends ListActivity  {
             super.onSaveInstanceState(outState);
             outState.putString(KEY_COL, color);
             outState.putString(KEY_LANG, lang);
-            outState.putBoolean(KEY_SOUND, sound);
+            outState.putString(KEY_SOUND, sound);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class ActivityViewSettings extends ListActivity  {
             super.onRestoreInstanceState(savedIS);
             color = savedIS.getString(KEY_COL);
             lang = savedIS.getString(KEY_LANG);
-            sound = savedIS.getBoolean(KEY_SOUND);
+            sound = savedIS.getString(KEY_SOUND);
     }
 
 //    @Override
@@ -129,7 +129,7 @@ public void alertColors()
                 }
                 if(item == 1) //red
                 {
-                    color = "255;0;0";
+                    color = "255;160;122";
                 }
                 if(item == 2) //green
                 {
@@ -139,9 +139,6 @@ public void alertColors()
                 {
                     color = "0;0;255";
                 }
-//                Editor editor = mPrefs.edit();
-//                editor.putString(KEY_COL, color);
-//                editor.commit();
                 savePreferences(KEY_COL, color);
                 dialog.dismiss();
                 //Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_COL, null), Toast.LENGTH_SHORT).show();
@@ -158,16 +155,20 @@ public void alertSounds()
            .setCancelable(false)
            .setPositiveButton("On", new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
-                   Editor editor = mPrefs.edit();
-                   editor.putBoolean(KEY_SOUND, true);
-                   editor.commit();
+                   savePreferences(KEY_SOUND, "on");
+                   Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_SOUND, "trolo"), Toast.LENGTH_SHORT).show();
+//                   Editor editor = mPrefs.edit();
+//                   editor.putBoolean(KEY_SOUND, true);
+//                   editor.commit();
                }
            })
            .setNegativeButton("Off", new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
-                   Editor editor = mPrefs.edit();
-                   editor.putBoolean(KEY_SOUND, false);
-                   editor.commit();
+                   savePreferences(KEY_SOUND, "off");
+                   Toast.makeText(getApplicationContext(), mPrefs.getString(KEY_SOUND, "trolo"), Toast.LENGTH_SHORT).show();
+//                   Editor editor = mPrefs.edit();
+//                   editor.putBoolean(KEY_SOUND, false);
+//                   editor.commit();
                }
            });
     AlertDialog alert = builder.create();
@@ -183,7 +184,7 @@ public void alertCustom()
                         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                             String value = inputR.getText().toString().trim();
-                                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
                                 savePreferences(KEY_COL, value);
                    }
                     });

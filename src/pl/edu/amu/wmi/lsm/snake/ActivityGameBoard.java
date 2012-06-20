@@ -41,7 +41,7 @@ public class ActivityGameBoard extends Activity {
 
     @Override
 	public void onCreate(Bundle savedInstanceState) {
-               // View view = this.findViewById(android.R.id.content);
+                View view = this.findViewById(android.R.id.content);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.gameboard);
                //sp = this.getApplicationContext().getSharedPreferences(SHARED_PREFERENCE, Activity.MODE_PRIVATE);
@@ -50,17 +50,47 @@ public class ActivityGameBoard extends Activity {
                 {
                 Intent j = getIntent();
                 Bundle bundle = j.getExtras();
-                String valueC = bundle.getString(KEY_COL);
-                String valueL = bundle.getString(KEY_LANG);
+                String valueC = bundle.getString(KEY_COL);               
                 Boolean valueR = bundle.getBoolean(KEY_RESTART);
-                //Boolean valueS = bundle.getBoolean(KEY_SOUND);
-                
+
+                String[] colors = valueC.split(";");
+                int[] kolory = null;
+                try {
+                    kolory = convertStringArraytoIntArray(colors);
+                } catch (Exception ex) {
+                    Logger.getLogger(ActivityGameBoard.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                view.setBackgroundColor(Color.rgb(kolory[0],kolory[1],kolory[2]));
                 if (valueR) {
                 	this.snakeView.resetGame();
                 }
                 }
                 catch(Exception e) {
-                	Log.v("ERROR", e.toString());
+                    //view.setBackgroundColor(Color.rgb(0,255,0));
+                    Log.v("ERROR", e.toString());
+                }
+
+                try {
+                    Intent j = getIntent();
+                    Bundle bundle = j.getExtras();
+                    String valueL = bundle.getString(KEY_LANG);
+                } catch (Exception e){
+
+                }
+                try {
+                    Intent j = getIntent();
+                    Bundle bundle = j.getExtras();
+                    String valueS = bundle.getString(KEY_SOUND);
+                    Toast.makeText(getApplicationContext(), valueS, Toast.LENGTH_SHORT).show();
+                    if(!(valueS=="off")) //dzwiek
+                    {
+                        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.maintheme);
+                        mediaPlayer.start(); // no need to call prepare(); create() does that for you
+                    }
+                } catch(Exception e) {
+                    Toast.makeText(getApplicationContext(), "lololo", Toast.LENGTH_SHORT).show();
+                        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.maintheme);
+                        mediaPlayer.start(); // no need to call prepare(); create() does that for you
                 }
                 
                 snakeView = (UberSnakeView) findViewById(R.id.snake);
@@ -76,23 +106,6 @@ public class ActivityGameBoard extends Activity {
                     	snakeView.setMode(SnakeView.READY);
                     }
                 }
-                
-                
-                
-//                String[] colors = valueC.split(";");
-//                int[] kolory = null;
-//                try {
-//                    kolory = convertStringArraytoIntArray(colors);
-//                } catch (Exception ex) {
-//                    Logger.getLogger(ActivityGameBoard.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                view.setBackgroundColor(Color.rgb(kolory[0],kolory[1],kolory[2]));
-//
-//                if(valueS) //dzwiek
-//                {
-//                    mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.maintheme);
-//                    mediaPlayer.start(); // no need to call prepare(); create() does that for you
-//                }
 	}
 	
 //        @Override
@@ -124,10 +137,13 @@ public class ActivityGameBoard extends Activity {
                    .setCancelable(false)
                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
+                           try {
+                           mediaPlayer.stop();
+                           } catch(Exception e) { }
                             Intent i = new Intent(ActivityGameBoard.this, SnakeActivity.class);
                             //i.setClass(view.getContext(), SnakeActivity.class);
                             startActivity(i); 
-                            //ActivityGameBoard.this.finish();
+                            ActivityGameBoard.this.finish();
                        }
                    })
                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
