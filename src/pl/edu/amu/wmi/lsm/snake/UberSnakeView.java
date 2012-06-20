@@ -151,6 +151,7 @@ public class UberSnakeView extends TileView {
             mediaPlayer = MediaPlayer.create(this.getContext(), R.raw.snake_lost);
             mediaPlayer.setVolume(1.0f, 1.0f);
             mediaPlayer.start();
+        	this.finishedGame();
             Log.v("INFO", "lost");
             return;
         }
@@ -281,4 +282,8 @@ public class UberSnakeView extends TileView {
     	this.score++;
     	this.scoreNumber.setText(Integer.toString(this.score));
     }
+    
+	private void finishedGame() {
+		// wynik jest w this.score
+	}
 }
