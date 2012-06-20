@@ -38,6 +38,7 @@ public class ActivityViewHighScores extends Activity {
 	//	db.addScore(new Score(3000));
 
 		List<Score> list = db.get3BestScores();
+		db.close();
 		List<Integer> listScores = new ArrayList<Integer>();
 		int i = 0;
 		for (Score s : list) {
@@ -66,7 +67,9 @@ public class ActivityViewHighScores extends Activity {
 
 	public void onClickDelete(View view) {
 		DataBaseHelper db = new DataBaseHelper(this);
+		db.getWritableDatabase();
 		db.deleteALL();
+		db.close();
 		Intent i = new Intent(this, ActivityViewHighScores.class);
 		startActivity(i);
 	}
