@@ -166,7 +166,7 @@ public class UberSnakeView extends TileView {
     private void omNomNom(Field next) {
     	this.rollDot();
 		this.ssssnake.move(next, true);
-		if (this.speed > 200)
+		if (this.speed > 50)
 			this.speed -= 50;
 		this.updateScore();
         mediaPlayer = MediaPlayer.create(this.getContext(), R.raw.snake_eats);
